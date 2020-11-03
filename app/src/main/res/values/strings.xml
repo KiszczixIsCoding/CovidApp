@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">CovidSupport</string>
+    <string name="new_cases">Nowych zachorowań</string>
+    <string name="new_deaths">Nowych zgonów</string>
+    <string name="cases">Ogólnie zachorowań</string>
+    <string name="deaths">Ogólnie zgonów</string>
+</resources>
