@@ -2,13 +2,16 @@ package pl.emb.covidsupport;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
+
+import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class VirusViewModel extends ViewModel {
-    private MutableLiveData<VirusStatistics> statistics;
+    private MutableLiveData<List<VirusStatistics>> statistics;
+    private MutableLiveData<VirusStatistics> totalStatistics;
 
-    public MutableLiveData<VirusStatistics> getStatistics() {
+    public MutableLiveData<List<VirusStatistics>> getStatistics() {
         if (statistics == null) {
             statistics = new MutableLiveData<>();
         }
@@ -20,14 +23,12 @@ public class VirusViewModel extends ViewModel {
         ExecutorService executorService = Executors.newFixedThreadPool(4);
         VirusRepository virusRepository = new VirusRepository(executorService);
         statistics = new MutableLiveData<>();
-        virusRepository.makeDataRequest(new VirusRepository.RepositoryCallback<VirusStatistics>() {
+        virusRepository.makeDataRequest(new VirusRepository.RepositoryCallback<List<VirusStatistics>>() {
             @Override
-            public void onComplete(Result<VirusStatistics> result) {
+            public void onComplete(Result<List<VirusStatistics>> result) {
                 if (result instanceof Result.Success) {
-                    statistics.postValue(((Result.Success<VirusStatistics>) result).data);
-                } else {
-                    statistics = new MutableLiveData<>();
-                    statistics.postValue(new VirusStatistics("None", "None"));
+                    statistics.postValue(((Result.Success<List<VirusStatistics>>) result).data);
+                    statistics.postValue(((Result.Success<List<VirusStatistics>>) result).data);
                 }
             }
         });

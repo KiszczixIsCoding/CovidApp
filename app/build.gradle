@@ -33,4 +33,5 @@ dependencies {
     implementation 'org.jsoup:jsoup:1.11.1'
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
     implementation "androidx.lifecycle:lifecycle-viewmodel:2.2.0"
+//    implementation(group: 'com.microsoft.sqlserver', name: 'mssql-jdbc', version: '6.1.0.jre7')
 }

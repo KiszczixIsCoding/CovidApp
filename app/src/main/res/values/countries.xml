@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="countriesNames">
+        <item>Argentyna</item>
+        <item>Angola</item>
+        <item>Australia</item>
+        <item>Algieria</item>
+    </string-array>
+</resources>

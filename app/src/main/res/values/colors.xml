@@ -5,4 +5,5 @@
     <color name="colorAccent">#03DAC5</color>
     <color name="colorCases">#FFD224</color>
     <color name="colorDeaths">#E21E13</color>
+    <color name="colorSpinner">#D3D3D3</color>
 </resources>
