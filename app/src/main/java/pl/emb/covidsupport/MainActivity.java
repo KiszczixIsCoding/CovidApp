@@ -5,7 +5,12 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import android.os.Bundle;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.TextView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -16,16 +21,24 @@ public class MainActivity extends AppCompatActivity {
 
         final TextView newCasesText = findViewById(R.id.newCasesText);
         final TextView newDeathsText = findViewById(R.id.newDeathsText);
+        final TextView totalCasesText = findViewById(R.id.totalCasesText);
+        final TextView totalDeathsText = findViewById(R.id.totalDeathsText);
+        Spinner countriesSpinner = findViewById(R.id.spinner);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.countriesNames, R.layout.support_simple_spinner_dropdown_item );
 
-        VirusViewModel virusViewModel = new ViewModelProvider(this)
-                .get(VirusViewModel.class);
+        countriesSpinner.setAdapter(adapter);
 
-        LiveData<VirusStatistics> data = virusViewModel.getStatistics();
-        data.observe(this, new Observer<VirusStatistics>() {
+        VirusViewModel virusViewModel = new ViewModelProvider(this).get(VirusViewModel.class);
+
+        LiveData<List<VirusStatistics>> data = virusViewModel.getStatistics();
+        data.observe(this, new Observer<List<VirusStatistics>>() {
             @Override
-            public void onChanged(VirusStatistics virusStatistics) {
-                newCasesText.setText(virusStatistics.getCases());
-                newDeathsText.setText(virusStatistics.getDeaths());
+            public void onChanged(List<VirusStatistics> virusStatistics) {
+                newCasesText.setText(virusStatistics.get(0).getCases());
+                newDeathsText.setText(virusStatistics.get(0).getDeaths());
+                totalCasesText.setText(virusStatistics.get(1).getCases());
+                totalDeathsText.setText(virusStatistics.get(1).getDeaths());
             }
         });
 

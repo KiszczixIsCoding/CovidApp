@@ -102,7 +102,7 @@
             android:layout_marginRight="14dp"
             android:layout_columnWeight="1"
             android:layout_rowWeight="1"
-            app:cardBackgroundColor="@color/colorPrimary"
+            app:cardBackgroundColor="@color/colorCases"
             app:cardElevation="16dp"
             app:cardCornerRadius="15dp" >
             <LinearLayout
@@ -123,7 +123,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textAlignment="center"
-                    android:textSize="20sp" />
+                    android:textSize="26sp" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
         <androidx.cardview.widget.CardView
@@ -134,7 +134,7 @@
             android:layout_marginRight="14dp"
             android:layout_columnWeight="1"
             android:layout_rowWeight="1"
-            app:cardBackgroundColor="@color/colorAccent"
+            app:cardBackgroundColor="@color/colorDeaths"
             app:cardElevation="16dp"
             app:cardCornerRadius="15dp" >
             <LinearLayout
@@ -154,9 +154,19 @@
                     android:id="@+id/totalDeathsText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textAlignment="center" />
+                    android:textAlignment="center"
+                    android:textSize="28sp" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
     </GridLayout>
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_weight="0.6"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:padding="10dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:background="@drawable/style_spinner"/>
 </LinearLayout>
