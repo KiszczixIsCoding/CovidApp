@@ -20,13 +20,14 @@
             android:textSize="24sp"
             android:layout_centerInParent="true"/>
     </RelativeLayout>
+
     <GridLayout
-        android:columnCount="2"
-        android:rowCount="2"
-        android:layout_weight="4"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:padding="14dp" >
+        android:layout_weight="4"
+        android:columnCount="2"
+        android:padding="14dp"
+        android:rowCount="2">
 
         <androidx.cardview.widget.CardView
             android:id="@+id/color"
@@ -34,12 +35,13 @@
             android:layout_height="0dp"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
-            android:layout_marginBottom="14dp"
             android:layout_marginLeft="14dp"
             android:layout_marginRight="14dp"
+            android:layout_marginBottom="14dp"
             app:cardBackgroundColor="@color/colorCases"
-            app:cardElevation="16dp"
-            app:cardCornerRadius="15dp">
+            app:cardCornerRadius="15dp"
+            app:cardElevation="16dp">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -53,25 +55,27 @@
                     android:text="@string/new_cases"
                     android:textAlignment="center"
                     android:textSize="16sp" />
+
                 <TextView
                     android:id="@+id/newCasesText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textAlignment="center"
-                    android:textSize="28sp"/>
+                    android:textSize="28sp" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
+
         <androidx.cardview.widget.CardView
-            android:layout_height="0dp"
             android:layout_width="0dp"
-            android:layout_columnWeight="1"
+            android:layout_height="0dp"
             android:layout_rowWeight="1"
-            android:layout_marginBottom="14dp"
+            android:layout_columnWeight="1"
             android:layout_marginLeft="14dp"
             android:layout_marginRight="14dp"
+            android:layout_marginBottom="14dp"
             app:cardBackgroundColor="@color/colorDeaths"
-            app:cardElevation="16dp"
-            app:cardCornerRadius="15dp" >
+            app:cardCornerRadius="15dp"
+            app:cardElevation="16dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -86,6 +90,7 @@
                     android:text="@string/new_deaths"
                     android:textAlignment="center"
                     android:textSize="16sp" />
+
                 <TextView
                     android:id="@+id/newDeathsText"
                     android:layout_width="match_parent"
@@ -94,17 +99,19 @@
                     android:textSize="28sp" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
+
         <androidx.cardview.widget.CardView
-            android:layout_height="0dp"
             android:layout_width="0dp"
-            android:layout_marginTop="14dp"
-            android:layout_marginLeft="14dp"
-            android:layout_marginRight="14dp"
-            android:layout_columnWeight="1"
+            android:layout_height="0dp"
             android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:layout_marginLeft="14dp"
+            android:layout_marginTop="14dp"
+            android:layout_marginRight="14dp"
             app:cardBackgroundColor="@color/colorCases"
-            app:cardElevation="16dp"
-            app:cardCornerRadius="15dp" >
+            app:cardCornerRadius="15dp"
+            app:cardElevation="16dp">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -118,6 +125,7 @@
                     android:text="@string/cases"
                     android:textAlignment="center"
                     android:textSize="16sp" />
+
                 <TextView
                     android:id="@+id/totalCasesText"
                     android:layout_width="match_parent"
@@ -126,17 +134,19 @@
                     android:textSize="26sp" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
+
         <androidx.cardview.widget.CardView
-            android:layout_height="0dp"
             android:layout_width="0dp"
-            android:layout_marginTop="14dp"
-            android:layout_marginLeft="14dp"
-            android:layout_marginRight="14dp"
-            android:layout_columnWeight="1"
+            android:layout_height="0dp"
             android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:layout_marginLeft="14dp"
+            android:layout_marginTop="14dp"
+            android:layout_marginRight="14dp"
             app:cardBackgroundColor="@color/colorDeaths"
-            app:cardElevation="16dp"
-            app:cardCornerRadius="15dp" >
+            app:cardCornerRadius="15dp"
+            app:cardElevation="16dp">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -150,6 +160,7 @@
                     android:text="@string/deaths"
                     android:textAlignment="center"
                     android:textSize="16sp" />
+
                 <TextView
                     android:id="@+id/totalDeathsText"
                     android:layout_width="match_parent"
@@ -160,6 +171,7 @@
         </androidx.cardview.widget.CardView>
 
     </GridLayout>
+
     <Spinner
         android:id="@+id/spinner"
         android:layout_weight="0.6"
@@ -169,4 +181,32 @@
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"
         android:background="@drawable/style_spinner"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="3">
+
+        <Button
+            android:id="@+id/regionsBtn"
+            android:layout_width="150dp"
+            android:layout_height="137dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="14dp"
+            android:layout_marginBottom="0dp"
+            android:background="@color/colorCases"
+            android:text="@string/button_regions_text" />
+
+        <Button
+            android:id="@+id/infoBtn"
+            android:layout_width="150dp"
+            android:layout_height="135dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="14dp"
+            android:layout_marginBottom="0dp"
+            android:background="@color/colorDeaths"
+            android:text="@string/info_button_text" />
+    </RelativeLayout>
+
 </LinearLayout>
