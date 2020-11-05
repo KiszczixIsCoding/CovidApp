@@ -11,15 +11,15 @@ public class VirusViewModel extends ViewModel {
     private MutableLiveData<List<VirusStatistics>> statistics;
     private MutableLiveData<VirusStatistics> totalStatistics;
 
-    public MutableLiveData<List<VirusStatistics>> getStatistics() {
+    public MutableLiveData<List<VirusStatistics>> getStatistics(String countryName) {
         if (statistics == null) {
             statistics = new MutableLiveData<>();
         }
-        getCovidData();
+        getCovidData(countryName);
         return statistics;
     }
 
-    public void getCovidData() {
+    public void getCovidData(String countryName) {
         ExecutorService executorService = Executors.newFixedThreadPool(4);
         VirusRepository virusRepository = new VirusRepository(executorService);
         statistics = new MutableLiveData<>();
@@ -31,6 +31,6 @@ public class VirusViewModel extends ViewModel {
                     statistics.postValue(((Result.Success<List<VirusStatistics>>) result).data);
                 }
             }
-        });
+        }, countryName);
     }
 }

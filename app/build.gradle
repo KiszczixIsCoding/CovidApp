@@ -26,7 +26,7 @@ dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'androidx.cardview:cardview:1.0.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.3'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
     implementation 'androidx.gridlayout:gridlayout:1.0.0'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
@@ -34,5 +34,6 @@ dependencies {
     implementation 'org.jsoup:jsoup:1.11.1'
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
     implementation "androidx.lifecycle:lifecycle-viewmodel:2.2.0"
-//    implementation(group: 'com.microsoft.sqlserver', name: 'mssql-jdbc', version: '6.1.0.jre7')
+    implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.3.1'
+
 }
