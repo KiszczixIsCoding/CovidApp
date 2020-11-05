@@ -5,7 +5,7 @@ android {
     buildToolsVersion "30.0.2"
 
     defaultConfig {
-        applicationId "pl.emb.jsoupproject"
+        applicationId "pl.emb.covidsupport"
         minSdkVersion 23
         targetSdkVersion 30
         versionCode 1

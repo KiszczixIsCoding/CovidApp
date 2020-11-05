@@ -4,7 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -44,5 +47,10 @@ public class MainActivity extends AppCompatActivity {
 
 //      SimpleDateFormat date = new SimpleDateFormat("dd MMMM yyyy", new Locale("pl"));
 //      textView.setText(date.format(Calendar.getInstance().getTime()));
+    }
+
+    public void onClickRegionsBtn(View view) {
+        Intent regionsIntent = new Intent(getApplicationContext(), RegionsActivity.class);
+        startActivity(regionsIntent);
     }
 }
