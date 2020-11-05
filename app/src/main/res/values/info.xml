@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="infoNames">
+        <item>Podstawowe informacje o kwarantannie</item>
+        <item>Objawy Covid-19</item>
+        <item>Jak możesz pomóc?</item>
+        <item>....</item>
+    </string-array>
+</resources>
