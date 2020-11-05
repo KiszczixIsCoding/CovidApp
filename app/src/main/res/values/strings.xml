@@ -5,6 +5,7 @@
     <string name="cases">Ogólnie zachorowań</string>
     <string name="deaths">Ogólnie zgonów</string>
     <string name="flag">Flaga</string>
+    <string name="statistics">Statystyki ze świata</string>
     <string name="button_regions_text">Sprawdź, w jakiej strefie znajduje się twój powiat</string>
     <string name="info_button_text">Podstawowe zasady bezpieczeństwa</string>
 </resources>

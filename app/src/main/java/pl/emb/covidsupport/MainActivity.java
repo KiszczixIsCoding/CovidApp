@@ -50,10 +50,16 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         }
 
         Collections.sort(localesList, new LocalesComparator());
+        int defaultPosition = 0;
         for(Locale localeCountry : localesList) {
             int id = getResources().getIdentifier(
                     localeCountry.getCountry().toLowerCase(), "raw", getPackageName());
-            countriesList1.add(new CountryItem(localeCountry.getDisplayCountry(), id));
+            String countryName = localeCountry.getDisplayCountry();
+
+            countriesList1.add(new CountryItem(countryName, id));
+            if (countryName.equals("Poland")) {
+                defaultPosition = localesList.indexOf(localeCountry);
+            }
         }
 
         CountriesAdapter countriesAdapter = new CountriesAdapter(this, countriesList1);
@@ -61,6 +67,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
         virusViewModel = new ViewModelProvider(this).get(VirusViewModel.class);
 
+        countriesSpinner.setSelection(defaultPosition);
         countriesSpinner.setOnItemSelectedListener(this);
     }
 

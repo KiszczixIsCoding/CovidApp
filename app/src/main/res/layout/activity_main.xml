@@ -16,8 +16,8 @@
             android:id="@+id/regionTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Hello World!"
-            android:textSize="24sp"
+            android:text="@string/statistics"
+            android:textSize="26sp"
             android:layout_centerInParent="true"/>
     </RelativeLayout>
 
