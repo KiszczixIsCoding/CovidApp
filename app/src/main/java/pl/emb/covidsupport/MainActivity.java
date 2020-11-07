@@ -7,10 +7,13 @@ import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -22,7 +25,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     private TextView newCasesText, newDeathsText, totalCasesText, totalDeathsText;
     private VirusViewModel virusViewModel;
     private LiveData<List<VirusStatistics>> data;
-
     private static class LocalesComparator implements Comparator<Locale> {
 
         @Override
@@ -62,27 +64,26 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             }
         }
 
+        virusViewModel = new ViewModelProvider(this).get(VirusViewModel.class);
         CountriesAdapter countriesAdapter = new CountriesAdapter(this, countriesList1);
         countriesSpinner.setAdapter(countriesAdapter);
-
-        virusViewModel = new ViewModelProvider(this).get(VirusViewModel.class);
-
         countriesSpinner.setSelection(defaultPosition);
         countriesSpinner.setOnItemSelectedListener(this);
     }
 
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-        String country = ((TextView) findViewById(R.id.country)).getText().toString();
+        String country = ((TextView)findViewById(R.id.country)).getText().toString();
         data = virusViewModel.getStatistics(country);
-        data.observe(this, new Observer<List<VirusStatistics>>() {
-            @Override
-            public void onChanged(List<VirusStatistics> virusStatistics) {
-                newCasesText.setText(virusStatistics.get(0).getCases());
-                newDeathsText.setText(virusStatistics.get(0).getDeaths());
-                totalCasesText.setText(virusStatistics.get(1).getCases());
-                totalDeathsText.setText(virusStatistics.get(1).getDeaths());
-            }
+        data.observe(this, virusStatistics -> {
+            newCasesText.setText(String.valueOf(
+                    virusStatistics.get(virusStatistics.size() - 1).getNewCases()));
+            newDeathsText.setText(String.valueOf(
+                    virusStatistics.get(virusStatistics.size() - 1).getNewDeaths()));
+            totalCasesText.setText(String.valueOf(
+                    virusStatistics.get(virusStatistics.size() - 1).getConfirmed()));
+            totalDeathsText.setText(String.valueOf(
+                    virusStatistics.get(virusStatistics.size() - 1).getDeaths()));
         });
     }
 
@@ -100,4 +101,5 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         Intent infoIntent = new Intent(getApplicationContext(), InformationActivity.class);
         startActivity(infoIntent);
     }
+
 }

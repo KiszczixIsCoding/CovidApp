@@ -1,20 +1,91 @@
 package pl.emb.covidsupport;
 
+import com.google.gson.annotations.SerializedName;
+
 public class VirusStatistics {
-    private String cases;
-    private String deaths;
 
-    public VirusStatistics(String cases, String deaths) {
-        this.cases = cases;
-        this.deaths = deaths;
+
+    private String Country;
+    private String CountryCode;
+    private String Province;
+    private String City;
+    private String CityCode;
+    private String Lat;
+    private String Lon;
+    private int Confirmed;
+    private int Deaths;
+    private int Recovered;
+    private int Active;
+    private String Status;
+    private String Date;
+    private int newCases;
+    private int newDeaths;
+
+    public void setNewCases(int newCases) {
+        this.newCases = newCases;
     }
 
-    public String getCases() {
-        return cases;
+    public void setNewDeaths(int newDeaths) {
+        this.newDeaths = newDeaths;
     }
 
-    public String getDeaths() {
-        return deaths;
+    public int getNewCases() {
+        return newCases;
     }
 
+    public int getNewDeaths() {
+        return newDeaths;
+    }
+
+    public String getCountry() {
+        return Country;
+    }
+
+    public String getCountryCode() {
+        return CountryCode;
+    }
+
+    public String getProvince() {
+        return Province;
+    }
+
+    public String getCity() {
+        return City;
+    }
+
+    public String getLat() {
+        return Lat;
+    }
+
+    public String getLon() {
+        return Lon;
+    }
+
+    public String getCityCode() {
+        return CityCode;
+    }
+
+    public int getConfirmed() {
+        return Confirmed;
+    }
+
+    public int getDeaths() {
+        return Deaths;
+    }
+
+    public int getRecovered() {
+        return Recovered;
+    }
+
+    public int getActive() {
+        return Active;
+    }
+
+    public String getStatus() {
+        return Status;
+    }
+
+    public String getDate() {
+        return Date;
+    }
 }

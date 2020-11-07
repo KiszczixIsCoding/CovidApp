@@ -2,14 +2,10 @@ package pl.emb.covidsupport;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
-
 import java.util.List;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 public class VirusViewModel extends ViewModel {
     private MutableLiveData<List<VirusStatistics>> statistics;
-    private MutableLiveData<VirusStatistics> totalStatistics;
 
     public MutableLiveData<List<VirusStatistics>> getStatistics(String countryName) {
         if (statistics == null) {
@@ -20,17 +16,19 @@ public class VirusViewModel extends ViewModel {
     }
 
     public void getCovidData(String countryName) {
-        ExecutorService executorService = Executors.newFixedThreadPool(4);
-        VirusRepository virusRepository = new VirusRepository(executorService);
+        VirusRepository virusRepository = new VirusRepository();
         statistics = new MutableLiveData<>();
-        virusRepository.makeDataRequest(new VirusRepository.RepositoryCallback<List<VirusStatistics>>() {
-            @Override
-            public void onComplete(Result<List<VirusStatistics>> result) {
-                if (result instanceof Result.Success) {
-                    statistics.postValue(((Result.Success<List<VirusStatistics>>) result).data);
-                    statistics.postValue(((Result.Success<List<VirusStatistics>>) result).data);
-                }
+        virusRepository.make(result -> {
+            if (result instanceof Result.Success) {
+                statistics.postValue(((Result.Success<List<VirusStatistics>>) result).data);
             }
-        }, countryName);
+        }, prepareUrl(countryName));
+    }
+
+    public String prepareUrl(String countryName) {
+        String formattedCountry = countryName.toLowerCase()
+                .replace(" ", "-");
+        return "total/country/" + formattedCountry
+                + "?from=2020-03-01T00:00:00Z&to=2020-11-05T00:00:00Z";
     }
 }
