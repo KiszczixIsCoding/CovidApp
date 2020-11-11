@@ -8,4 +8,7 @@
     <string name="statistics">Statystyki ze świata</string>
     <string name="button_regions_text">Sprawdź, w jakiej strefie znajduje się twój powiat</string>
     <string name="info_button_text">Podstawowe zasady bezpieczeństwa</string>
+    <string name="overall_chart">Liczba zachorowań i zgonów od początku epidemii</string>
+    <string name="new_cases_chart">Liczba nowych zachorowań w ciągu ostatnich 14 dni</string>
+    <string name="new_deaths_chart">Liczba nowych zgonów w ciągu ostatnich 14 dni</string>
 </resources>

@@ -1,7 +1,5 @@
 package pl.emb.covidsupport;
 
-import com.google.gson.annotations.SerializedName;
-
 public class VirusStatistics {
 
 

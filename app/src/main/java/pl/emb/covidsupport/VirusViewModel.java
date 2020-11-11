@@ -28,7 +28,6 @@ public class VirusViewModel extends ViewModel {
     public String prepareUrl(String countryName) {
         String formattedCountry = countryName.toLowerCase()
                 .replace(" ", "-");
-        return "total/country/" + formattedCountry
-                + "?from=2020-03-01T00:00:00Z&to=2020-11-05T00:00:00Z";
+        return "total/country/" + formattedCountry;
     }
 }
