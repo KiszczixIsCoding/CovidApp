@@ -49,6 +49,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     private TextView newCasesText, newDeathsText, totalCasesText, totalDeathsText;
     private VirusViewModel virusViewModel;
     private LiveData<List<VirusStatistics>> data;
+
     private static class LocalesComparator implements Comparator<Locale> {
 
         @Override
@@ -154,6 +155,12 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         Intent infoIntent = new Intent(getApplicationContext(), InformationActivity.class);
         startActivity(infoIntent);
     }
+
+    public void onClickMapBtn(View view) {
+        Intent mapIntent = new Intent(getApplicationContext(), MapActivity.class);
+        startActivity(mapIntent);
+    }
+
 
     public void drawLineChart(List<String> listX, List<Integer> listY1,
                               List<Integer> listY2, LineChart lineChart) {
