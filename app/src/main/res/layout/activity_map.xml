@@ -7,6 +7,13 @@
     <WebView
         android:id="@+id/activity_webview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="681dp" />
+
+    <Button
+        android:id="@+id/regionsBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="onClickRegionsBtn"
+        android:text="@string/button_regions_text" />
 
 </LinearLayout>

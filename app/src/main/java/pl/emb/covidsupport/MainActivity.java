@@ -146,10 +146,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     }
 
-    public void onClickRegionsBtn(View view) {
-        Intent regionsIntent = new Intent(getApplicationContext(), RegionsActivity.class);
-        startActivity(regionsIntent);
-    }
 
     public void onClickInfoBtn(View view) {
         Intent infoIntent = new Intent(getApplicationContext(), InformationActivity.class);
