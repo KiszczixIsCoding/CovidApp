@@ -12,4 +12,5 @@
     <string name="new_cases_chart">Liczba nowych zachorowań w ciągu ostatnich 14 dni</string>
     <string name="new_deaths_chart">Liczba nowych zgonów w ciągu ostatnich 14 dni</string>
     <string name="sytuacja_w_polsce">Sytuacja w Polsce</string>
+    <string name="header_text_bot">Wybierz pytanie z listy, a otrzymasz odpowiedz</string>
 </resources>
