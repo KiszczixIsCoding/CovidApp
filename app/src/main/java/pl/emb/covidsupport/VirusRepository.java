@@ -25,6 +25,9 @@ import retrofit2.internal.EverythingIsNonNull;
 
 public class VirusRepository {
     private List<VirusStatistics> statistics;
+    private static final String BASE_URL = "https://api.covid19api.com/";
+    private static final String OVERALL_BASE_URL = "https://corona.lmao.ninja/v2/countries?yesterday&sort";
+
 
     interface RepositoryCallback<T> {
         void onComplete(Result<List<VirusStatistics>> result);
@@ -36,7 +39,7 @@ public class VirusRepository {
     }
 
     public void make(final RepositoryCallback<List<VirusStatistics>> callback, String url) {
-        Retrofit apiProvider = new Retrofit.Builder().baseUrl("https://api.covid19api.com/")
+        Retrofit apiProvider = new Retrofit.Builder().baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create()).build();
 
         VirusApiHolder virusApiHolder = apiProvider.create(VirusApiHolder.class);

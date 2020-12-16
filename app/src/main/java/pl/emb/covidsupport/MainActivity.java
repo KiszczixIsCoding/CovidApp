@@ -2,9 +2,7 @@ package pl.emb.covidsupport;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -13,11 +11,8 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.LineChart;
-import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
@@ -26,23 +21,16 @@ import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.formatter.IAxisValueFormatter;
-import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
+import java.util.Arrays;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Set;
+
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     private Spinner countriesSpinner;
@@ -50,48 +38,36 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     private VirusViewModel virusViewModel;
     private LiveData<List<VirusStatistics>> data;
 
-    private static class LocalesComparator implements Comparator<Locale> {
-
-        @Override
-        public int compare(Locale locale, Locale t1) {
-            return locale.getDisplayCountry().compareTo(t1.getDisplayCountry());
-        }
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         newCasesText = findViewById(R.id.newCasesText);
         newDeathsText = findViewById(R.id.newDeathsText);
         totalCasesText = findViewById(R.id.totalCasesText);
         totalDeathsText = findViewById(R.id.totalDeathsText);
         countriesSpinner = findViewById(R.id.spinner);
 
-        ArrayList<CountryItem> countriesList1 = new ArrayList<>();
+        List<String> excludedCountries =
+                Arrays.asList(getResources().getStringArray(R.array.excludedIsoCodes));
+        ArrayList<CountryItem> countriesList = new ArrayList<>();
 
-        List<Locale> localesList = new ArrayList<>();
-        for (String country : Locale.getISOCountries()) {
-            localesList.add(new Locale("en", country));
-        }
-
-        Collections.sort(localesList, new LocalesComparator());
-        int defaultPosition = 0;
-        for(Locale localeCountry : localesList) {
-            int id = getResources().getIdentifier(
-                    localeCountry.getCountry().toLowerCase(), "raw", getPackageName());
-            String countryName = localeCountry.getDisplayCountry();
-
-            countriesList1.add(new CountryItem(countryName, id));
-            if (countryName.equals("Poland")) {
-                defaultPosition = localesList.indexOf(localeCountry);
+        for (String iso : Locale.getISOCountries()) {
+            if (!excludedCountries.contains(iso)) {
+                Locale locale = new Locale("", iso);
+                countriesList.add(new CountryItem(this, locale));
             }
         }
 
-        virusViewModel = new ViewModelProvider(this).get(VirusViewModel.class);
-        CountriesAdapter countriesAdapter = new CountriesAdapter(this, countriesList1);
+        Collections.sort(countriesList);
 
+        CountryItem poland = new CountryItem(this, new Locale("", "PL"));
+        int defaultPosition = countriesList.indexOf(poland);
+
+
+        virusViewModel = new ViewModelProvider(this).get(VirusViewModel.class);
+        CountriesAdapter countriesAdapter = new CountriesAdapter(this, countriesList);
         countriesSpinner.setAdapter(countriesAdapter);
         countriesSpinner.setSelection(defaultPosition);
         countriesSpinner.setOnItemSelectedListener(this);
@@ -99,8 +75,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-        String country = ((TextView)findViewById(R.id.country)).getText().toString();
-        data = virusViewModel.getStatistics(country);
+        data = virusViewModel.getStatistics(((CountryItem)countriesSpinner.getSelectedItem()).getApiCountry());
         data.observe(this, virusStatistics -> {
             newCasesText.setText(String.valueOf(
                     virusStatistics.get(virusStatistics.size() - 1).getNewCases()));
