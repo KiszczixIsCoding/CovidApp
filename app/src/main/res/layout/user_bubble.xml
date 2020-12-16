@@ -13,6 +13,7 @@
         android:textSize="20sp"
         android:fontFamily="@font/montserrat"
         android:layout_alignParentEnd="true"
+        android:elevation="3dp"
         android:text="Hi Hello World"
         android:background="@drawable/user_bubble"/>
 

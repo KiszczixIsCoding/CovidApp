@@ -12,6 +12,7 @@
         android:padding="12dp"
         android:textSize="20sp"
         android:fontFamily="@font/montserrat"
+        android:elevation="3dp"
         android:text="Hi Hello World"
         android:background="@drawable/bot_bubble"/>
 
