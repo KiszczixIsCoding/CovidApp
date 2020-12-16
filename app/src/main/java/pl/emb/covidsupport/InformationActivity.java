@@ -39,18 +39,18 @@ public class InformationActivity extends AppCompatActivity implements AdapterVie
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         recyclerView.setAdapter(messageAdapter);
 
+        // a method to take a selected question and add to a variable 'item'
         infoSpinner.setOnItemSelectedListener(this);
     }
 
     private void spinnerThings() {
         infoSpinner = (Spinner) findViewById(R.id.spinnerInfo);
+
         // adapter with a list of questions
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.infoNames, R.layout.support_simple_spinner_dropdown_item);
-        infoSpinner.setAdapter(adapter);
 
-        // a method to take a selected question and add to a variable 'item'
-        //infoSpinner.setOnItemSelectedListener(this);
+        infoSpinner.setAdapter(adapter);
     }
 
     @Override
