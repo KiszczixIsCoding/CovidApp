@@ -6,7 +6,6 @@ import androidx.lifecycle.ViewModelProvider;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Spinner;
@@ -33,7 +32,7 @@ import java.util.Locale;
 
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
-    private Spinner countriesSpinner;
+    private Spinner countriesSpinner;                                               // country list expansion bar
     private TextView newCasesText, newDeathsText, totalCasesText, totalDeathsText;
     private VirusViewModel virusViewModel;
     private LiveData<List<VirusStatistics>> data;
@@ -53,6 +52,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 Arrays.asList(getResources().getStringArray(R.array.excludedIsoCodes));
         ArrayList<CountryItem> countriesList = new ArrayList<>();
 
+        // loop to save countries to the list
+
         for (String iso : Locale.getISOCountries()) {
             if (!excludedCountries.contains(iso)) {
                 Locale locale = new Locale("", iso);
@@ -65,8 +66,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         CountryItem poland = new CountryItem(this, new Locale("", "PL"));
         int defaultPosition = countriesList.indexOf(poland);
 
-
         virusViewModel = new ViewModelProvider(this).get(VirusViewModel.class);
+
         CountriesAdapter countriesAdapter = new CountriesAdapter(this, countriesList);
         countriesSpinner.setAdapter(countriesAdapter);
         countriesSpinner.setSelection(defaultPosition);
@@ -89,6 +90,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             List<String> allDates = new ArrayList<>();
             List<Integer> allCases = new ArrayList<>();
             List<Integer> allDeaths = new ArrayList<>();
+
             for (int k = 0; k < virusStatistics.size(); k++) {
                 allDates.add(virusStatistics.get(k).getDate());
                 allCases.add(virusStatistics.get(k).getConfirmed());
@@ -101,6 +103,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             List<String> dates = new ArrayList<>();
             List<Integer> cases = new ArrayList<>();
             List<Integer> deaths = new ArrayList<>();
+
             for (int k = 0; k < 14; k++) {
                 int index = virusStatistics.size() - 14 + k;
                 dates.add(virusStatistics.get(index).getDate());
@@ -121,7 +124,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     }
 
-
     public void onClickInfoBtn(View view) {
         Intent infoIntent = new Intent(getApplicationContext(), InformationActivity.class);
         startActivity(infoIntent);
@@ -132,13 +134,11 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         startActivity(mapIntent);
     }
 
-
     public void drawLineChart(List<String> listX, List<Integer> listY1,
                               List<Integer> listY2, LineChart lineChart) {
 
         SimpleDateFormat dateFormat = new SimpleDateFormat(
                 "dd/MM/yyyy", new Locale("pl"));
-
 
         ArrayList<Entry> casesList = new ArrayList<>();
         ArrayList<Entry> deathsList = new ArrayList<>();
@@ -152,10 +152,12 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         set1.setDrawCircles(false);
         set1.setColor(getColor(R.color.colorCases));
         set1.setLineWidth(6);
+
         LineDataSet set2 = new LineDataSet(deathsList, "Data set 2");
         set2.setDrawCircles(false);
         set2.setColor(Color.RED);
         set2.setLineWidth(6);
+
         ArrayList<ILineDataSet> dataSets = new ArrayList<>();
         dataSets.add(set1);
         dataSets.add(set2);

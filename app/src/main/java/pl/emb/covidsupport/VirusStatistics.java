@@ -2,7 +2,6 @@ package pl.emb.covidsupport;
 
 public class VirusStatistics {
 
-
     private String Country;
     private String CountryCode;
     private String Province;
@@ -10,12 +9,13 @@ public class VirusStatistics {
     private String CityCode;
     private String Lat;
     private String Lon;
+    private String Status;
+    private String Date;
+
     private int Confirmed;
     private int Deaths;
     private int Recovered;
     private int Active;
-    private String Status;
-    private String Date;
     private int newCases;
     private int newDeaths;
 

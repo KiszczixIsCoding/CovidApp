@@ -15,7 +15,7 @@ public class InformationActivity extends AppCompatActivity {
 
         Spinner infoSpinner = findViewById(R.id.spinnerInfo);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.infoNames, R.layout.support_simple_spinner_dropdown_item );
+                R.array.infoNames, R.layout.support_simple_spinner_dropdown_item);
         infoSpinner.setPrompt("Miejsce na informacje");
         infoSpinner.setAdapter(adapter);
     }

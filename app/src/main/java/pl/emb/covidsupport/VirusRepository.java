@@ -1,18 +1,8 @@
 package pl.emb.covidsupport;
 
 import android.util.Log;
-import android.widget.Toast;
 
-import org.apache.commons.lang3.StringUtils;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.select.Elements;
-
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
-import java.util.concurrent.Executor;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -27,7 +17,6 @@ public class VirusRepository {
     private List<VirusStatistics> statistics;
     private static final String BASE_URL = "https://api.covid19api.com/";
     private static final String OVERALL_BASE_URL = "https://corona.lmao.ninja/v2/countries?yesterday&sort";
-
 
     interface RepositoryCallback<T> {
         void onComplete(Result<List<VirusStatistics>> result);
