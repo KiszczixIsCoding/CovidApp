@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="countriesNames">
-        <item>Argentyna</item>
-        <item>Angola</item>
-        <item>Australia</item>
-        <item>Algieria</item>
+        <item>FK:Macedonia Północna</item>
+        <item>CD:DR Konga</item>
+        <item>CV:Rep. Zielonego Przylądka</item>
+        <item>ZA:Rep. Południowej Afryki</item>
+        <item>CF:Rep. Środkowoafrykańska</item>
+        <item>ST:Wyspy Św. Tomasza i Książęca</item>
+        <item>AE:Zjed. Emiraty Arabskie</item>
     </string-array>
 </resources>

@@ -1,4 +1,4 @@
-package pl.emb.covidsupport;
+package pl.emb.covidsupport.global;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -7,14 +7,14 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-
-import com.squareup.picasso.Picasso;
-
 import java.util.ArrayList;
+import pl.emb.covidsupport.R;
 
+/***
+ * Adapter for spinner with countries' names and flags
+ */
 public class CountriesAdapter extends ArrayAdapter<CountryItem> {
 
     public CountriesAdapter(Context context, ArrayList<CountryItem> countriesList) {
@@ -43,7 +43,7 @@ public class CountriesAdapter extends ArrayAdapter<CountryItem> {
         CountryItem item = getItem(position);
         if (item != null) {
             image.setImageResource(item.getCountryId());
-            textView.setText(item.getCountryName());
+            textView.setText(item.getPolishCountryName());
         }
         return convertView;
     }
@@ -58,8 +58,8 @@ public class CountriesAdapter extends ArrayAdapter<CountryItem> {
 
         CountryItem item = getItem(position);
         if (item != null) {
-            image.setImageResource(item.getCountryId());
-            textView.setText(item.getCountryName());
+           image.setImageResource(item.getCountryId());
+           textView.setText(item.getPolishCountryName());
         }
         return convertView;
     }

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:title="@string/world"
+          android:icon="@drawable/earth"
+          android:id="@+id/globalStats"/>
+    <item android:title="@string/poland"
+          android:icon="@drawable/poland1"
+          android:id="@+id/polandStats"/>
+    <item android:title="@string/qa"
+          android:icon="@drawable/faq"
+          android:id="@+id/questions"/>
+</menu>

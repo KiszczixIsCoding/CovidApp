@@ -1,5 +1,11 @@
-package pl.emb.covidsupport;
+package pl.emb.covidsupport.global;
 
+/***
+ * Class for connection between ViewModel and Repository.
+ * Result.Success - response body
+ * Result.Error - response error
+ * @param <T>
+ */
 public abstract class Result<T> {
     private Result() {}
 
