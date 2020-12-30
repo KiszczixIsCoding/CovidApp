@@ -17,4 +17,5 @@
     <string name="poland">Polska</string>
     <string name="qa">FAQ</string>
     <string name="recovered_chart">Liczba osób wyleczonych z koronawirusa od początku epidemii</string>
+    <string name="stateDate">Stan na</string>
 </resources>

@@ -34,7 +34,7 @@ public class ChartsManager {
             = new SimpleDateFormat("dd/MM", new Locale("pl"));
 
     private final SimpleDateFormat engDataFormat = new SimpleDateFormat(
-            "MM/dd/yyyy", new Locale("en"));
+            "MM/dd/yy", new Locale("en"));
 
     private Context context;
     public ChartsManager(Context context) {

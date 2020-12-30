@@ -5,8 +5,8 @@
     <color name="colorAccent">#03DAC5</color>
     <color name="colorCases">#FFD224</color>
     <color name="colorDeaths">#E21E13</color>
-    <color name="colorStart">#9BB8B8</color>
-    <color name="colorEnd">#FFFFFF</color>
+    <color name="colorStart">#18276e</color>
+    <color name="colorEnd">#449af5</color>
     <color name="colorSpinner">#EAE6E6</color>
     <color name="colorCasesLine">#7F17FF</color>
     <color name="colorDeathsLine">#C2185B</color>
@@ -14,4 +14,8 @@
     <color name="colorDeathsChart">#F44336</color>
     <color name="colorLine">#064CFF</color>
     <color name="colorFill">#6FB2F8</color>
+    <color name="colorBorder">#707070</color>
+    <color name="colorBoard1">#80808080</color>
+    <color name="colorBoard2">#FFFFFF</color>
+    <color name="colorBoard3">#6200FF</color>
 </resources>

@@ -18,28 +18,51 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="122dp"
-                android:layout_weight="5">
+                android:layout_height="56dp"
+                android:layout_marginBottom="20dp"
+                android:layout_weight="5"
+                android:background="@drawable/header">
 
                 <TextView
                     android:id="@+id/regionTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="@font/inknut_antiqua_light"
+                    android:shadowColor="#000000"
                     android:text="@string/statistics"
-                    android:textSize="26sp" />
+                    android:textAllCaps="true"
+                    android:textColor="#FFFFFF"
+                    android:textSize="18sp" />
             </RelativeLayout>
 
+            <TextView
+                android:id="@+id/stateLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/stateDate"
+                android:textSize="20sp" />
             <Spinner
                 android:id="@+id/spinner"
                 android:layout_width="match_parent"
                 android:layout_height="38dp"
-                android:layout_marginStart="30dp"
-                android:layout_marginEnd="30dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="30dp"
+                android:layout_marginHorizontal="30dp"
                 android:layout_weight="1"
                 android:background="@drawable/style_spinner"
                 android:padding="5dp"
                 android:spinnerMode="dialog" />
+
+            <View
+                android:id="@+id/divider"
+                android:layout_width="match_parent"
+                android:layout_marginHorizontal="30dp"
+                android:layout_height="1dp"
+                android:layout_weight="10"
+                android:background="@color/colorBorder" />
 
             <GridLayout
                 android:layout_width="match_parent"
@@ -58,15 +81,15 @@
                     android:layout_marginLeft="14dp"
                     android:layout_marginRight="14dp"
                     android:layout_marginBottom="14dp"
-                    app:cardBackgroundColor="@color/colorCases"
                     app:cardCornerRadius="15dp"
                     app:cardElevation="16dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:orientation="vertical"
-                        android:padding="5dp">
+                        android:padding="5dp"
+                        android:background="@drawable/card_gradient">
 
                         <TextView
                             android:id="@+id/newCasesLabel"
@@ -81,7 +104,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:textAlignment="center"
-                            android:textSize="28sp" />
+                            android:textSize="28sp"
+                            android:textColor="@color/colorCasesChart"/>
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
@@ -93,15 +117,15 @@
                     android:layout_marginLeft="14dp"
                     android:layout_marginRight="14dp"
                     android:layout_marginBottom="14dp"
-                    app:cardBackgroundColor="@color/colorDeaths"
                     app:cardCornerRadius="15dp"
                     app:cardElevation="16dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:orientation="vertical"
-                        android:padding="5dp">
+                        android:padding="5dp"
+                        android:background="@drawable/card_gradient">
 
                         <TextView
                             android:id="@+id/newDeathsLabel"
@@ -116,7 +140,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:textAlignment="center"
-                            android:textSize="28sp" />
+                            android:textSize="28sp"
+                            android:textColor="@color/colorDeathsChart"/>
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
@@ -128,15 +153,15 @@
                     android:layout_marginLeft="14dp"
                     android:layout_marginTop="14dp"
                     android:layout_marginRight="14dp"
-                    app:cardBackgroundColor="@color/colorCases"
                     app:cardCornerRadius="15dp"
                     app:cardElevation="16dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:orientation="vertical"
-                        android:padding="5dp">
+                        android:padding="5dp"
+                        android:background="@drawable/card_gradient">
 
                         <TextView
                             android:id="@+id/totalCasesLabel"
@@ -151,7 +176,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:textAlignment="center"
-                            android:textSize="26sp" />
+                            android:textSize="26sp"
+                            android:textColor="@color/colorCasesLine"/>
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
@@ -163,15 +189,15 @@
                     android:layout_marginLeft="14dp"
                     android:layout_marginTop="14dp"
                     android:layout_marginRight="14dp"
-                    app:cardBackgroundColor="@color/colorDeaths"
                     app:cardCornerRadius="15dp"
                     app:cardElevation="16dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:orientation="vertical"
-                        android:padding="5dp">
+                        android:padding="5dp"
+                        android:background="@drawable/card_gradient">
 
                         <TextView
                             android:id="@+id/totalDeathsLabel"
@@ -186,7 +212,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:textAlignment="center"
-                            android:textSize="28sp" />
+                            android:textSize="28sp"
+                            android:textColor="@color/colorDeathsLine"/>
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
@@ -257,8 +284,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:layout_marginTop="35dp"
-                android:paddingLeft="5dp"
-                android:paddingRight="5dp">
+                android:layout_marginHorizontal="5dp">
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

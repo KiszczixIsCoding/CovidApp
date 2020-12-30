@@ -18,9 +18,12 @@ import androidx.lifecycle.ViewModelProvider;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.LineChart;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -32,21 +35,20 @@ public class GlobalFragment extends Fragment implements AdapterView.OnItemSelect
     private final static int DEFAULT_SPINNER_POS = 135;
     private final static int DEFAULT_DAYS_RANGE = 14;
     private View root; // GlobalFragment view
-    private Spinner countriesSpinner;   // country list expansion bar
-    private TextView newCasesText, newDeathsText, totalCasesText, totalDeathsText;
+    private TextView stateText, newCasesText, newDeathsText, totalCasesText, totalDeathsText;
     private VirusViewModel virusViewModel;
-    private LiveData<MainCovidStats> mainData;
-    private LiveData<HistoricalCovidStats> historicalData;
     private ArrayList<CountryItem> countriesList; // list of countries
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         root = inflater.inflate(R.layout.fragment_global, container, false);
+        stateText = root.findViewById(R.id.stateLabel);
         newCasesText = root.findViewById(R.id.newCasesText);
         newDeathsText = root.findViewById(R.id.newDeathsText);
         totalCasesText = root.findViewById(R.id.totalCasesText);
         totalDeathsText = root.findViewById(R.id.totalDeathsText);
-        countriesSpinner = root.findViewById(R.id.spinner);
+        // country list expansion bar
+        Spinner countriesSpinner = root.findViewById(R.id.spinner);
 
         List<String> excludedCountries =
                 Arrays.asList(getResources().getStringArray(R.array.excludedIsoCodes));
@@ -77,7 +79,8 @@ public class GlobalFragment extends Fragment implements AdapterView.OnItemSelect
 
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-        mainData = virusViewModel.getNovelMainStats(countriesList.get(i).getIso2());
+        LiveData<MainCovidStats> mainData =
+                virusViewModel.getNovelMainStats(countriesList.get(i).getIso2());
         mainData.observe(this, novelMainStatistics -> {
             newCasesText.setText(String.valueOf(novelMainStatistics.getTodayCases()));
             newDeathsText.setText(String.valueOf(novelMainStatistics.getTodayDeaths()));
@@ -85,16 +88,23 @@ public class GlobalFragment extends Fragment implements AdapterView.OnItemSelect
             totalDeathsText.setText(String.valueOf(novelMainStatistics.getDeaths()));
         });
 
-        historicalData = virusViewModel.getHistorical(countriesList.get(i).getIso2());
-        historicalData.observe(this, historicalCovidStats ->  {
-            List<String> dates = historicalCovidStats.getDates();
-            List<Integer> cases = historicalCovidStats.getCases();
-            List<Integer> deaths = historicalCovidStats.getDeaths();
+        LiveData<HistoricalCovidStats> historicalData =
+                virusViewModel.getHistorical(countriesList.get(i).getIso2());
+        historicalData.observe(this, historicalStats ->  {
 
-            List<String> subDates = historicalCovidStats.getLastDates(DEFAULT_DAYS_RANGE);
-            List<Integer> subCases = historicalCovidStats.getLastCases(DEFAULT_DAYS_RANGE);
-            List<Integer> subDeaths = historicalCovidStats.getLastDeaths(DEFAULT_DAYS_RANGE);
-            List<Integer> recovered = historicalCovidStats.getRecovered();
+//          Format and display the day of last update
+            String stateWithDate = stateText.getText() + " " + formatStateDate(
+                    historicalStats.getDates().get(historicalStats.getDates().size() - 1));
+            stateText.setText(stateWithDate);
+
+            List<String> dates = historicalStats.getDates();
+            List<Integer> cases = historicalStats.getCases();
+            List<Integer> deaths = historicalStats.getDeaths();
+
+            List<String> subDates = historicalStats.getLastDates(DEFAULT_DAYS_RANGE);
+            List<Integer> subCases = historicalStats.getLastCases(DEFAULT_DAYS_RANGE);
+            List<Integer> subDeaths = historicalStats.getLastDeaths(DEFAULT_DAYS_RANGE);
+            List<Integer> recovered = historicalStats.getRecovered();
 
             ChartsManager chartsManager = new ChartsManager(getContext());
 
@@ -121,5 +131,21 @@ public class GlobalFragment extends Fragment implements AdapterView.OnItemSelect
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
         // TODO Auto-generated method stub
+    }
+
+    public String formatStateDate(String date) {
+
+        SimpleDateFormat plFormat = new SimpleDateFormat(
+                "dd.MM.20yy", new Locale("pl"));
+        SimpleDateFormat engFormat = new SimpleDateFormat(
+                "MM/dd/yy", new Locale("eng"));
+        String formattedDate = "";
+        try {
+            Date lastDate = engFormat.parse(date);
+            formattedDate = plFormat.format(lastDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return formattedDate;
     }
 }

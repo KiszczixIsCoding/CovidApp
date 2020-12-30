@@ -2,12 +2,10 @@ package pl.emb.covidsupport;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,7 +29,7 @@ public class InformationActivity extends Fragment implements AdapterView.OnItemS
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        this.root = (ViewGroup) inflater.inflate(R.layout.activity_information,
+        this.root = (ViewGroup) inflater.inflate(R.layout.fragment_information,
                 container, false);
         init();
         return root;
