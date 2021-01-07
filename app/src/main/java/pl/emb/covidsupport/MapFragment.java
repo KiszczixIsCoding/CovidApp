@@ -11,10 +11,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 
-public class MapFragment extends Fragment {
+import java.util.Arrays;
+import java.util.List;
+
+public class MapFragment extends Fragment implements AdapterView.OnItemSelectedListener {
     WebView mWebView;
     View root;
+    private Spinner regionsSpinner;
+    private List<String> regionsList;
 
     @Nullable
     @Override
@@ -22,6 +30,15 @@ public class MapFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         root =  inflater.inflate(R.layout.fragment_map, container, false);
         mWebView = root.findViewById(R.id.activity_webview);
+        //spinner initialization:
+        regionsSpinner = root.findViewById(R.id.regionsSpinner);
+        regionsSpinner.setOnItemSelectedListener(this);
+        regionsList = Arrays.asList(getResources().getStringArray(R.array.regions));
+        ArrayAdapter regionsAdapter = new ArrayAdapter(getContext(),
+                android.R.layout.simple_spinner_item, regionsList);
+        regionsAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        regionsSpinner.setAdapter(regionsAdapter);
+
         //enable javascript engine
         mWebView.getSettings().setJavaScriptEnabled(true);
         //mWebView.loadUrl("https://flo.uri.sh/visualisation/4141169/embed?auto=1");
@@ -53,4 +70,13 @@ public class MapFragment extends Fragment {
         startActivity(regionsIntent);
     }
 
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
+    }
 }
