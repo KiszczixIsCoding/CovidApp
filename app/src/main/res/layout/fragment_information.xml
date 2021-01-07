@@ -25,7 +25,7 @@
         android:textColor="@color/colorSpinner"
         android:textSize="25sp" />
 
-    <Spinner
+    <!--Spinner
         android:id="@+id/spinnerInfo"
         android:layout_width="match_parent"
         android:layout_height="39dp"
@@ -34,6 +34,23 @@
         android:layout_marginStart="30dp"
         android:layout_marginTop="30dp"
         android:layout_marginEnd="30dp"
-        android:layout_marginBottom="20dp"/>
+        android:layout_marginBottom="20dp"/-->
+
+    <EditText
+        android:id="@+id/userInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="8dp"
+        android:background="@drawable/bg_edit_text"
+        android:fontFamily="@font/montserrat"
+        android:hint="@string/ask_bot"
+        android:inputType="text"
+        android:textColor="#fff"
+        android:padding="12dp"
+        android:imeActionId="4"
+        android:imeOptions="actionSend"
+        android:textColorHint="#fff"
+        android:textSize="20sp"/>
 
 </RelativeLayout>

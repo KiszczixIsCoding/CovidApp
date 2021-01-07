@@ -18,4 +18,5 @@
     <string name="qa">FAQ</string>
     <string name="recovered_chart">Liczba osób wyleczonych z koronawirusa od początku epidemii</string>
     <string name="stateDate">Stan na</string>
+    <string name="ask_bot">Ask bot</string>
 </resources>

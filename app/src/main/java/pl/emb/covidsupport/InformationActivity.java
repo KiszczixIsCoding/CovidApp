@@ -7,19 +7,24 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class InformationActivity extends Fragment implements AdapterView.OnItemSelectedListener {
 
-    private Spinner infoSpinner;
+    //private Spinner infoSpinner;
+    private EditText userInput;
     private String item;
     RecyclerView recyclerView;              // to create dynamic list with messengers (between user and bot)
     List<ResponseMessage> responseMessageList;
@@ -44,7 +49,8 @@ public class InformationActivity extends Fragment implements AdapterView.OnItemS
 //    }
 
     private void init() {
-        spinnerThings();                    // function to add all elements to the spinner with questions
+        //spinnerThings();                    // function to add all elements to the spinner with questions
+        inputThings();
         recyclerView = root.findViewById(R.id.conversation);
 
         responseMessageList = new ArrayList<>();
@@ -55,10 +61,10 @@ public class InformationActivity extends Fragment implements AdapterView.OnItemS
         recyclerView.setAdapter(messageAdapter);
 
         // a method to take a selected question and add to a variable 'item'
-        infoSpinner.setOnItemSelectedListener(this);
+        //infoSpinner.setOnItemSelectedListener(this);
     }
 
-    private void spinnerThings() {
+    /*private void spinnerThings() {
         infoSpinner = root.findViewById(R.id.spinnerInfo);
 
         // adapter with a list of questions
@@ -66,7 +72,40 @@ public class InformationActivity extends Fragment implements AdapterView.OnItemS
                 R.array.infoNames, R.layout.support_simple_spinner_dropdown_item);
 
         infoSpinner.setAdapter(adapter);
+    }*/
+
+    private void inputThings() {
+        userInput = root.findViewById(R.id.userInput);
+
+        userInput.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
+                if (i == EditorInfo.IME_ACTION_SEND) {
+                    ResponseMessage responseMessage = new ResponseMessage(userInput.getText().toString(), true);
+                    responseMessageList.add(responseMessage);
+
+                    ResponseMessage responseMessage2 = new ResponseMessage(userInput.getText().toString(), false);
+                    responseMessageList.add(responseMessage2);
+
+                    messageAdapter.notifyDataSetChanged();
+
+                    if(!isLastVisible()) {
+                        recyclerView.smoothScrollToPosition(messageAdapter.getItemCount() - 1);
+                    }
+                }
+                return false;
+            }
+        });
     }
+
+    private boolean isLastVisible() {
+        LinearLayoutManager layoutManager = ((LinearLayoutManager) recyclerView.getLayoutManager());
+        int pos = layoutManager.findLastCompletelyVisibleItemPosition();
+        int numItems = recyclerView.getAdapter().getItemCount();
+        return (pos >= numItems);
+    }
+
+    // lines below are for the future, if bot don't work with writing questions
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
