@@ -15,6 +15,7 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -25,6 +26,7 @@ public class InformationActivity extends Fragment implements AdapterView.OnItemS
 
     //private Spinner infoSpinner;
     private EditText userInput;
+    private ImageButton btn_send;
     private String item;
     RecyclerView recyclerView;              // to create dynamic list with messengers (between user and bot)
     List<ResponseMessage> responseMessageList;
@@ -76,11 +78,13 @@ public class InformationActivity extends Fragment implements AdapterView.OnItemS
 
     private void inputThings() {
         userInput = root.findViewById(R.id.userInput);
+        btn_send = root.findViewById(R.id.btn_send);
 
-        userInput.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+        btn_send.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
-                if (i == EditorInfo.IME_ACTION_SEND) {
+            public void onClick(View view) {
+                String msg = userInput.getText().toString();
+                if (!msg.equals("")) {
                     ResponseMessage responseMessage = new ResponseMessage(userInput.getText().toString(), true);
                     responseMessageList.add(responseMessage);
 
@@ -93,9 +97,9 @@ public class InformationActivity extends Fragment implements AdapterView.OnItemS
                         recyclerView.smoothScrollToPosition(messageAdapter.getItemCount() - 1);
                     }
                 }
-                return false;
             }
         });
+
     }
 
     private boolean isLastVisible() {
