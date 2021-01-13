@@ -19,7 +19,7 @@ import java.util.List;
 
 import pl.emb.covidsupport.R;
 
-public class InformationActivity extends Fragment {
+public class InformationFragment extends Fragment {
 
     private EditText userInput;
     private ImageButton btn_send;
