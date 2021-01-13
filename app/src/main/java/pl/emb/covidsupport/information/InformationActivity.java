@@ -19,9 +19,8 @@ import java.util.List;
 
 import pl.emb.covidsupport.R;
 
-public class InformationActivity extends Fragment implements AdapterView.OnItemSelectedListener {
+public class InformationActivity extends Fragment {
 
-    //private Spinner infoSpinner;
     private EditText userInput;
     private ImageButton btn_send;
     private String item;
@@ -29,6 +28,7 @@ public class InformationActivity extends Fragment implements AdapterView.OnItemS
     List<ResponseMessage> responseMessageList;
     MessageAdapter messageAdapter;
     ViewGroup root;
+    AnswersBase answersBase;
 
     @Nullable
     @Override
@@ -39,14 +39,6 @@ public class InformationActivity extends Fragment implements AdapterView.OnItemS
         return root;
     }
 
-    //    @Override
-//    protected void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_information);
-//
-//        init();                             // function to initialize all important things
-//    }
-
     private void init() {
         //spinnerThings();                    // function to add all elements to the spinner with questions
         inputThings();
@@ -55,23 +47,12 @@ public class InformationActivity extends Fragment implements AdapterView.OnItemS
         responseMessageList = new ArrayList<>();
         messageAdapter = new MessageAdapter(responseMessageList, root.getContext());
 
+        answersBase = new AnswersBase();
+
         recyclerView.setLayoutManager(new LinearLayoutManager(root.getContext(),
                 LinearLayoutManager.VERTICAL, false));
         recyclerView.setAdapter(messageAdapter);
-
-        // a method to take a selected question and add to a variable 'item'
-        //infoSpinner.setOnItemSelectedListener(this);
     }
-
-    /*private void spinnerThings() {
-        infoSpinner = root.findViewById(R.id.spinnerInfo);
-
-        // adapter with a list of questions
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(root.getContext(),
-                R.array.infoNames, R.layout.support_simple_spinner_dropdown_item);
-
-        infoSpinner.setAdapter(adapter);
-    }*/
 
     private void inputThings() {
         userInput = root.findViewById(R.id.userInput);
@@ -82,17 +63,29 @@ public class InformationActivity extends Fragment implements AdapterView.OnItemS
             public void onClick(View view) {
                 String msg = userInput.getText().toString();
                 if (!msg.equals("")) {
-                    ResponseMessage responseMessage = new ResponseMessage(userInput.getText().toString(), true);
+                    ResponseMessage responseMessage = new ResponseMessage(msg, true);
                     responseMessageList.add(responseMessage);
 
-                    ResponseMessage responseMessage2 = new ResponseMessage(userInput.getText().toString(), false);
-                    responseMessageList.add(responseMessage2);
+                    Boolean pom = false;
+
+                    for (int i = 0; i < answersBase.questions.size(); i++) {
+                        if (msg.contains(answersBase.questions.get(i))) {
+                            ResponseMessage responseMessage2 = new ResponseMessage(answersBase.ansewrs.get(i), false);
+                            responseMessageList.add(responseMessage2);
+                            pom = true;
+                        }
+                    }
+
+                    if (pom == false) {
+                        ResponseMessage responseMessage2 = new ResponseMessage("Przykro mi, ale nie rozumiem :c", false);
+                        responseMessageList.add(responseMessage2);
+                    }
 
                     userInput.setText("");
 
                     messageAdapter.notifyDataSetChanged();
 
-                    if(!isLastVisible()) {
+                    if (!isLastVisible()) {
                         recyclerView.smoothScrollToPosition(messageAdapter.getItemCount() - 1);
                     }
                 }
@@ -106,25 +99,5 @@ public class InformationActivity extends Fragment implements AdapterView.OnItemS
         int pos = layoutManager.findLastCompletelyVisibleItemPosition();
         int numItems = recyclerView.getAdapter().getItemCount();
         return (pos >= numItems);
-    }
-
-    // lines below are for the future, if bot don't work with writing questions
-
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        // on selecting a spinner item
-        this.item = parent.getItemAtPosition(position).toString();
-
-       ResponseMessage message = new ResponseMessage(this.item, true);
-        responseMessageList.add(message);
-
-        ResponseMessage messageBot = new ResponseMessage(this.item, false);
-        responseMessageList.add(messageBot);
-
-        messageAdapter.notifyDataSetChanged();
-    }
-
-    public void onNothingSelected(AdapterView<?> arg0) {
-        // TODO Auto-generated method stub
     }
 }
