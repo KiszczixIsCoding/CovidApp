@@ -8,6 +8,7 @@ import android.os.Bundle;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import pl.emb.covidsupport.global.GlobalFragment;
+import pl.emb.covidsupport.poland.MapFragment;
 
 /***
  * Main activity, which manages bottomNavigationMenu

@@ -1,4 +1,4 @@
-package pl.emb.covidsupport;
+package pl.emb.covidsupport.poland;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -17,6 +17,9 @@ import android.widget.Spinner;
 
 import java.util.Arrays;
 import java.util.List;
+
+import pl.emb.covidsupport.R;
+import pl.emb.covidsupport.RegionsFragment;
 
 public class MapFragment extends Fragment implements AdapterView.OnItemSelectedListener {
     WebView mWebView;
