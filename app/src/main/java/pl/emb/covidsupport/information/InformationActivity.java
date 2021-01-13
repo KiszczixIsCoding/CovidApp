@@ -1,4 +1,4 @@
-package pl.emb.covidsupport;
+package pl.emb.covidsupport.information;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -7,20 +7,17 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.Spinner;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import pl.emb.covidsupport.R;
 
 public class InformationActivity extends Fragment implements AdapterView.OnItemSelectedListener {
 
@@ -90,6 +87,8 @@ public class InformationActivity extends Fragment implements AdapterView.OnItemS
 
                     ResponseMessage responseMessage2 = new ResponseMessage(userInput.getText().toString(), false);
                     responseMessageList.add(responseMessage2);
+
+                    userInput.setText("");
 
                     messageAdapter.notifyDataSetChanged();
 
