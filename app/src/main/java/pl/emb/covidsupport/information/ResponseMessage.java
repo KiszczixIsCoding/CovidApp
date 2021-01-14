@@ -1,4 +1,4 @@
-package pl.emb.covidsupport;
+package pl.emb.covidsupport.information;
 
 public class ResponseMessage {
 

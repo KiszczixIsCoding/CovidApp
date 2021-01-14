@@ -1,4 +1,4 @@
-package pl.emb.covidsupport;
+package pl.emb.covidsupport.information;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -9,6 +9,8 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
+
+import pl.emb.covidsupport.R;
 
 public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.CustomViewHolder> {
 

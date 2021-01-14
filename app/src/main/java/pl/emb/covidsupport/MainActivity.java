@@ -8,6 +8,7 @@ import android.os.Bundle;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import pl.emb.covidsupport.global.GlobalFragment;
+import pl.emb.covidsupport.information.InformationFragment;
 import pl.emb.covidsupport.poland.MapFragment;
 
 /***
@@ -32,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
             } else if (id == R.id.polandStats) {
                 selectedFragment = new MapFragment();
             } else {
-                selectedFragment = new InformationActivity();
+                selectedFragment = new InformationFragment();
             }
 
 //            Show selected fragment
