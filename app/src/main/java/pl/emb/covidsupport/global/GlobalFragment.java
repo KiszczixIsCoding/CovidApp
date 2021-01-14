@@ -93,7 +93,7 @@ public class GlobalFragment extends Fragment implements AdapterView.OnItemSelect
         historicalData.observe(this, historicalStats ->  {
 
 //          Format and display the day of last update
-            String stateWithDate = stateText.getText() + " " + formatStateDate(
+            String stateWithDate = stateText.getText().subSequence(0,7) + " " + formatStateDate(
                     historicalStats.getDates().get(historicalStats.getDates().size() - 1));
             stateText.setText(stateWithDate);
 
