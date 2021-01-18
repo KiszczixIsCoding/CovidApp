@@ -4,31 +4,24 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
-
-import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
 import java.util.List;
 
 import pl.emb.covidsupport.R;
-import pl.emb.covidsupport.RegionsFragment;
-import pl.emb.covidsupport.global.GlobalFragment;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class PolandFragment extends Fragment implements AdapterView.OnItemSelectedListener {
-    WebView mWebView;
     View root;
     private Spinner regionsSpinner;
     private List<String> regionsList;
@@ -112,7 +105,11 @@ public class PolandFragment extends Fragment implements AdapterView.OnItemSelect
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        if (position == 2) {
+            getParentFragmentManager().beginTransaction().replace(
+                    R.id.fragmentPolandContainer, new RegionsFragment()).commit();
 
+        }
     }
 
     @Override

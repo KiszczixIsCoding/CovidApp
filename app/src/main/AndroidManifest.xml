@@ -14,7 +14,7 @@
         android:theme="@style/AppTheme">
 <!--        <activity android:name=".MapActivity"></activity>-->
 <!--        <activity android:name=".InformationFragment" />-->
-        <activity android:name=".RegionsFragment" />
+        <activity android:name=".poland.RegionsFragment" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
