@@ -6,20 +6,25 @@ import androidx.fragment.app.Fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
-import android.webkit.WebViewClient;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
 import java.util.List;
 
 import pl.emb.covidsupport.R;
 import pl.emb.covidsupport.RegionsFragment;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MapFragment extends Fragment implements AdapterView.OnItemSelectedListener {
     WebView mWebView;
@@ -42,6 +47,44 @@ public class MapFragment extends Fragment implements AdapterView.OnItemSelectedL
         regionsAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         regionsSpinner.setAdapter(regionsAdapter);
 
+        Call<PolishCovidStats> polishStats = RetrofitClientBuilder.
+                getPolishCovidDataService().getAllStats();
+        polishStats.enqueue(new Callback<PolishCovidStats>() {
+            @Override
+            public void onResponse(Call<PolishCovidStats> call, Response<PolishCovidStats> response) {
+                if (response.isSuccessful()) {
+                    Log.e("success", response.body().toString());
+                } else {
+                    Log.e("failure", "fail");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<PolishCovidStats> call, Throwable t) {
+                Log.e("failure", t.getLocalizedMessage());
+            }
+        });
+
+
+//        Call<List<PolishCovidStats>> polishStatsList = RetrofitClientBuilder.
+//                getPolishCovidDataService().getAllStats();
+//        polishStatsList.enqueue(new Callback<List<PolishCovidStats>>() {
+//            @Override
+//            public void onResponse(@NotNull Call<List<PolishCovidStats>> call, @NotNull Response<List<PolishCovidStats>> response) {
+//
+//                Log.e("success", response.body().toString());
+//                if (response.isSuccessful()) {
+//                    Log.e("success", response.body().toString());
+//                } else {
+//                    Log.e("failure", "fail");
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<List<PolishCovidStats>> call, Throwable t) {
+//                Log.e("failure", t.getLocalizedMessage());
+//            }
+//        });
         //enable javascript engine
         mWebView.getSettings().setJavaScriptEnabled(true);
         //mWebView.loadUrl("https://flo.uri.sh/visualisation/4141169/embed?auto=1");
