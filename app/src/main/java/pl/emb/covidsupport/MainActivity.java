@@ -9,7 +9,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import pl.emb.covidsupport.global.GlobalFragment;
 import pl.emb.covidsupport.information.InformationFragment;
-import pl.emb.covidsupport.poland.MapFragment;
+import pl.emb.covidsupport.poland.PolandFragment;
 
 /***
  * Main activity, which manages bottomNavigationMenu
@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
             if (id == R.id.globalStats) {
                 selectedFragment = new GlobalFragment();
             } else if (id == R.id.polandStats) {
-                selectedFragment = new MapFragment();
+                selectedFragment = new PolandFragment();
             } else {
                 selectedFragment = new InformationFragment();
             }

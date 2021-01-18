@@ -2,6 +2,7 @@ package pl.emb.covidsupport.poland;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
 import java.util.Map;
 
 /***
@@ -16,16 +17,18 @@ public class PolishCovidStats {
     @SerializedName("deceased")
     public Integer deceased;
     @SerializedName("infectedByRegion")
-    public Map<Integer,Map<String,String>> infectedByRegion;
+//    public Map<String,Map<String,String>> infectedByRegion;
+    public ArrayList<Map<String, String>> infectedByRegion;
     @SerializedName("sourceUrl")
     public String sourceUrl;
-    @SerializedName("lastUpdatedAtApigy")
+    @SerializedName("lastUpdatedAtApify")
     public String lastUpdatedAtApify;
     @SerializedName("readMe")
     public String readMe;
 
-    public PolishCovidStats(Integer infected, Integer deceased, Map<Integer,
-            Map<String, String>> infectedByRegion, String sourceUrl, String lastUpdatedAtApify, String readMe) {
+    public PolishCovidStats(Integer infected, Integer deceased,
+                            ArrayList<Map<String, String>> infectedByRegion, String sourceUrl,
+                            String lastUpdatedAtApify, String readMe) {
         this.infected = infected;
         this.deceased = deceased;
         this.infectedByRegion = infectedByRegion;
@@ -50,11 +53,11 @@ public class PolishCovidStats {
         this.deceased = deceased;
     }
 
-    public Map<Integer, Map<String, String>> getInfectedByRegion() {
+    public ArrayList<Map<String, String>> getInfectedByRegion() {
         return infectedByRegion;
     }
 
-    public void setInfectedByRegion(Map<Integer, Map<String, String>> infectedByRegion) {
+    public void setInfectedByRegion(ArrayList<Map<String, String>> infectedByRegion) {
         this.infectedByRegion = infectedByRegion;
     }
 
@@ -80,5 +83,17 @@ public class PolishCovidStats {
 
     public void setReadMe(String readMe) {
         this.readMe = readMe;
+    }
+
+    @Override
+    public String toString() {
+        return "PolishCovidStats{" +
+                "infected=" + infected +
+                ", deceased=" + deceased +
+                ", infectedByRegion=" + infectedByRegion +
+                ", sourceUrl='" + sourceUrl + '\'' +
+                ", lastUpdatedAtApify='" + lastUpdatedAtApify + '\'' +
+                ", readMe='" + readMe + '\'' +
+                '}';
     }
 }
