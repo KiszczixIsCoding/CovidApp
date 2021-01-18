@@ -43,25 +43,6 @@ public class PolandFragment extends Fragment implements AdapterView.OnItemSelect
         getParentFragmentManager().beginTransaction().replace(
                 R.id.fragmentPolandContainer, new MapFragment()).commit();
 
-        Call<PolishCovidStats> polishStats = RetrofitClientBuilder.
-                getPolishCovidDataService().getAllStats();
-        polishStats.enqueue(new Callback<PolishCovidStats>() {
-            @Override
-            public void onResponse(Call<PolishCovidStats> call, Response<PolishCovidStats> response) {
-                if (response.isSuccessful()) {
-                    Log.e("success", response.body().toString());
-                } else {
-                    Log.e("failure", "fail");
-                }
-            }
-
-            @Override
-            public void onFailure(Call<PolishCovidStats> call, Throwable t) {
-                Log.e("failure", t.getLocalizedMessage());
-            }
-        });
-
-
 //        Call<List<PolishCovidStats>> polishStatsList = RetrofitClientBuilder.
 //                getPolishCovidDataService().getAllStats();
 //        polishStatsList.enqueue(new Callback<List<PolishCovidStats>>() {
