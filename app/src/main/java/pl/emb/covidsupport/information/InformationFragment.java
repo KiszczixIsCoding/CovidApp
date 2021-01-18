@@ -10,7 +10,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
@@ -40,7 +39,6 @@ public class InformationFragment extends Fragment {
     }
 
     private void init() {
-        //spinnerThings();                    // function to add all elements to the spinner with questions
         inputThings();
         recyclerView = root.findViewById(R.id.conversation);
 
@@ -66,17 +64,17 @@ public class InformationFragment extends Fragment {
                     ResponseMessage responseMessage = new ResponseMessage(msg, true);
                     responseMessageList.add(responseMessage);
 
-                    Boolean pom = false;
+                    boolean pom = false;
 
                     for (int i = 0; i < answersBase.questions.size(); i++) {
-                        if (msg.contains(answersBase.questions.get(i))) {
-                            ResponseMessage responseMessage2 = new ResponseMessage(answersBase.ansewrs.get(i), false);
+                        if (msg.toUpperCase().contains(answersBase.questions.get(i))) {
+                            ResponseMessage responseMessage2 = new ResponseMessage(answersBase.answers.get(i), false);
                             responseMessageList.add(responseMessage2);
                             pom = true;
                         }
                     }
 
-                    if (pom == false) {
+                    if (!pom) {
                         ResponseMessage responseMessage2 = new ResponseMessage("Przykro mi, ale nie rozumiem :c", false);
                         responseMessageList.add(responseMessage2);
                     }
