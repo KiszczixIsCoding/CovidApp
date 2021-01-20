@@ -135,6 +135,110 @@ public class InformationFragment extends Fragment {
                         pom = true;
                     }
 
+                    // covid start
+                    if(msg.toUpperCase().contains(answersBase.questions.get(29)) ||
+                            msg.toUpperCase().contains(answersBase.questions.get(30)) ||
+                            msg.toUpperCase().contains(answersBase.questions.get(31)) ||
+                            msg.toUpperCase().contains(answersBase.questions.get(32)) ||
+                            msg.toUpperCase().contains(answersBase.questions.get(33)) ||
+                            msg.toUpperCase().contains(answersBase.questions.get(34)) ||
+                            ((msg.toUpperCase().contains(answersBase.questions.get(35)) &&
+                            msg.toUpperCase().contains(answersBase.questions.get(36)))) ||
+                            (msg.toUpperCase().contains(answersBase.questions.get(37)) &&
+                                    msg.toUpperCase().contains(answersBase.questions.get(39))) ||
+                            (msg.toUpperCase().contains(answersBase.questions.get(37)) &&
+                                    msg.toUpperCase().contains(answersBase.questions.get(40))) ||
+                            (msg.toUpperCase().contains(answersBase.questions.get(38)) &&
+                                    msg.toUpperCase().contains(answersBase.questions.get(39))) ||
+                            (msg.toUpperCase().contains(answersBase.questions.get(38)) &&
+                                    msg.toUpperCase().contains(answersBase.questions.get(40)))) {
+
+                        ResponseMessage responseMessage7 = new ResponseMessage(answersBase.answers.get(5), false);
+                        responseMessageList.add(responseMessage7);
+                        pom = true;
+                    }
+
+                    // age dependance
+                    if(msg.toUpperCase().contains(answersBase.questions.get(41)) ||
+                            msg.toUpperCase().contains(answersBase.questions.get(42)) ||
+                            msg.toUpperCase().contains(answersBase.questions.get(43))) {
+
+                        ResponseMessage responseMessage8 = new ResponseMessage(answersBase.answers.get(6), false);
+                        responseMessageList.add(responseMessage8);
+                        pom = true;
+                    }
+
+                    // reliable data
+                    if(((msg.toUpperCase().contains(answersBase.questions.get(44)) &&
+                            msg.toUpperCase().contains(answersBase.questions.get(45)))) ||
+                            (msg.toUpperCase().contains(answersBase.questions.get(44)) &&
+                                    msg.toUpperCase().contains(answersBase.questions.get(46))) ||
+                            ((msg.toUpperCase().contains(answersBase.questions.get(44)) &&
+                                    msg.toUpperCase().contains(answersBase.questions.get(47)))) ||
+                            (msg.toUpperCase().contains(answersBase.questions.get(44)) &&
+                                    msg.toUpperCase().contains(answersBase.questions.get(48)))) {
+
+                        ResponseMessage responseMessage9 = new ResponseMessage(answersBase.answers.get(7), false);
+                        responseMessageList.add(responseMessage9);
+                        pom = true;
+                    }
+
+                    // where make test
+                    if(((msg.toUpperCase().contains(answersBase.questions.get(49)) &&
+                            msg.toUpperCase().contains(answersBase.questions.get(51)))) ||
+                            (msg.toUpperCase().contains(answersBase.questions.get(49)) &&
+                                    msg.toUpperCase().contains(answersBase.questions.get(52))) ||
+                            ((msg.toUpperCase().contains(answersBase.questions.get(49)) &&
+                                    msg.toUpperCase().contains(answersBase.questions.get(53)))) ||
+                            (msg.toUpperCase().contains(answersBase.questions.get(50)) &&
+                                    msg.toUpperCase().contains(answersBase.questions.get(51))) ||
+                            ((msg.toUpperCase().contains(answersBase.questions.get(50)) &&
+                                    msg.toUpperCase().contains(answersBase.questions.get(52)))) ||
+                            (msg.toUpperCase().contains(answersBase.questions.get(50)) &&
+                                    msg.toUpperCase().contains(answersBase.questions.get(53)))) {
+
+                        ResponseMessage responseMessage10 = new ResponseMessage(answersBase.answers.get(8), false);
+                        responseMessageList.add(responseMessage10);
+                        pom = true;
+                    }
+
+                    // vaccination
+                    if(((msg.toUpperCase().contains(answersBase.questions.get(54)) &&
+                            msg.toUpperCase().contains(answersBase.questions.get(58)))) ||
+                            (msg.toUpperCase().contains(answersBase.questions.get(55)) &&
+                                    msg.toUpperCase().contains(answersBase.questions.get(58))) ||
+                            ((msg.toUpperCase().contains(answersBase.questions.get(56)) &&
+                                    msg.toUpperCase().contains(answersBase.questions.get(58)))) ||
+                            (msg.toUpperCase().contains(answersBase.questions.get(57)) &&
+                                    msg.toUpperCase().contains(answersBase.questions.get(58)))) {
+
+                        ResponseMessage responseMessage11 = new ResponseMessage(answersBase.answers.get(9), false);
+                        responseMessageList.add(responseMessage11);
+                        pom = true;
+                    }
+
+                    // referral
+                    if(((msg.toUpperCase().contains(answersBase.questions.get(26)) &&
+                            msg.toUpperCase().contains(answersBase.questions.get(59))))) {
+
+                        ResponseMessage responseMessage12 = new ResponseMessage(answersBase.answers.get(10), false);
+                        responseMessageList.add(responseMessage12);
+                        pom = true;
+                    }
+
+                    // complications
+                    if(msg.toUpperCase().contains(answersBase.questions.get(60)) ||
+                            msg.toUpperCase().contains(answersBase.questions.get(61)) ||
+                            ((msg.toUpperCase().contains(answersBase.questions.get(62)) &&
+                            msg.toUpperCase().contains(answersBase.questions.get(63)))) ||
+                            (msg.toUpperCase().contains(answersBase.questions.get(62)) &&
+                                    msg.toUpperCase().contains(answersBase.questions.get(64)))) {
+
+                        ResponseMessage responseMessage13 = new ResponseMessage(answersBase.answers.get(11), false);
+                        responseMessageList.add(responseMessage13);
+                        pom = true;
+                    }
+
                     if (!pom) {
                         ResponseMessage responseMessage2 = new ResponseMessage("Przykro mi, ale nie rozumiem :c", false);
                         responseMessageList.add(responseMessage2);

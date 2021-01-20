@@ -1,0 +1,74 @@
+TYPY PYTAŃ, KTÓRE BOT ROZUMIE:
+
+OBJAWY:
+Jakie objawy są najbardziej typowe dla COVID?
+jakie są objawy zarażenia
+zapytać o objawy
+Jakie są objawy koronawirusa?
+jakie są objawy
+Jakie objawy daje Covid-19?
+
+SPOSOBY ROZPRZESTRZENIANIA SIĘ WIRUSA:
+w jaki sposob rozprzestrzenia się koronawirus
+jak się rozprzestrzenia covid
+jakie sa sposoby rozprzestrzeniania
+Jak porusza się wirus
+jak przemieszcza się wirus
+jak się roznosci wirus
+
+JAK PRZECIWDZIAŁAĆ:
+Jakie środki ostrożności należy stosować?
+Jak się przed tym uchronić?
+Jakie są sposoby zapobiegania?
+jak przeciwdziałać rozprzestrzenianiu
+
+CO JEŚLI POZYTYWNY:
+Co zrobić jeśli test jest pozytywny
+od czego zaczac gdy test wyjdzie pozytywny
+co mam zrobić jeśli wynik jest pozytywny
+
+POCZĄTEK PANDEMII:
+Jak rozpoczęła się pandemia?
+Jaki był początek epidemii?
+W jaki sposób zaczęła się epidemia 
+jak zaczęła się epidemia?
+skąd się wziął koronawirus?
+kiedy został wykryty koronawirus
+kiedy zaczęła się epidemia?
+
+NIEBEZPIECZEŃSTWO DLA RÓŻNYCH GRUP WIEKOWYCH:
+jak groźny jest dla poszczególnych grup wiekowych
+w zależności od wieku
+czy wiek ma wpływ na zagrożenie zakażeniem
+
+WIARYGODNE ŹRÓDŁA:
+skąd czerpać wiarygodne informacje?
+jakie są wiarygodne źródła na temat koronawirusa?
+gdzie znajdę prawdziwe informacje?
+wiarygodne dane
+
+GDZIE MOŻNA ZROBIĆ TEST:
+gdzie można zrobić test na koronawirusa
+dokąd muszę się udać, żeby zrobić test
+
+ZGŁOSZENIE NA SZCZEPIENIE:
+jak zglosic sie na szczepienie
+jak wyglada zgloszenie na szczepienie
+
+SKIEROWANIE NA TEST:
+czy skierowanie jest konieczne, żeby zrobić test?
+
+POWIKŁADANIA
+Jakie powikładania mogą wystąpić po chorowaniu na covid?
+jakie skutki na organizm wywoluje covid
+
+INNE WYBRANE PYTANIA, NA KTÓRE BOT NA RAZIE NIE REAGUJE:
+
+- obostrzenia
+- jak wygląda kwarantanna
+- kiedy można zrobic test na covid
+- gdzie się zaszczepić, czy jest bezpieczna
+- wpływ pozytywnego wyniku na osoby zamieszkujące razem
+- jak długo się czeka na wynik testu
+- objawy po szczepionce
+- możliwości leczenia
