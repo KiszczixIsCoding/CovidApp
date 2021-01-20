@@ -22,6 +22,11 @@ public class RegionsFragment extends Fragment {
     View root;
     TextView numberCases, numberDeaths;
 
+    int regionNumber;
+
+    public RegionsFragment(int regionNumber) {
+        this.regionNumber = regionNumber;
+    }
 
     @Nullable
     @Override
@@ -38,7 +43,8 @@ public class RegionsFragment extends Fragment {
             public void onResponse(Call<PolishCovidStats> call, Response<PolishCovidStats> response) {
                 if (response.isSuccessful()) {
                     Log.e("success", response.body().toString());
-                    numberCases.setText(response.body().getInfected().toString());  //TODO: fix
+                    numberCases.setText(response.body().getInfectedByRegion().get(regionNumber).get("infectedCount"));  //TODO: fix
+                    numberDeaths.setText(response.body().getInfectedByRegion().get(regionNumber).get("deceasedCount"));
 
                 } else {
                     Log.e("failure", "fail");
