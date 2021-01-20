@@ -87,9 +87,9 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:background="@drawable/card_gradient"
                         android:orientation="vertical"
-                        android:padding="5dp"
-                        android:background="@drawable/card_gradient">
+                        android:padding="5dp">
 
                         <TextView
                             android:id="@+id/newCasesLabel"
@@ -104,8 +104,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:textAlignment="center"
-                            android:textSize="28sp"
-                            android:textColor="@color/colorCasesChart"/>
+                            android:textColor="@color/colorCasesChart"
+                            android:textSize="28sp" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
@@ -123,9 +123,9 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:background="@drawable/card_gradient"
                         android:orientation="vertical"
-                        android:padding="5dp"
-                        android:background="@drawable/card_gradient">
+                        android:padding="5dp">
 
                         <TextView
                             android:id="@+id/newDeathsLabel"
@@ -140,8 +140,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:textAlignment="center"
-                            android:textSize="28sp"
-                            android:textColor="@color/colorDeathsChart"/>
+                            android:textColor="@color/colorDeathsChart"
+                            android:textSize="28sp" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
@@ -159,9 +159,9 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:background="@drawable/card_gradient"
                         android:orientation="vertical"
-                        android:padding="5dp"
-                        android:background="@drawable/card_gradient">
+                        android:padding="5dp">
 
                         <TextView
                             android:id="@+id/totalCasesLabel"
@@ -176,8 +176,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:textAlignment="center"
-                            android:textSize="26sp"
-                            android:textColor="@color/colorCasesLine"/>
+                            android:textColor="@color/colorCasesLine"
+                            android:textSize="26sp" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
@@ -195,9 +195,9 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:background="@drawable/card_gradient"
                         android:orientation="vertical"
-                        android:padding="5dp"
-                        android:background="@drawable/card_gradient">
+                        android:padding="5dp">
 
                         <TextView
                             android:id="@+id/totalDeathsLabel"
@@ -212,8 +212,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:textAlignment="center"
-                            android:textSize="28sp"
-                            android:textColor="@color/colorDeathsLine"/>
+                            android:textColor="@color/colorDeathsLine"
+                            android:textSize="28sp" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 

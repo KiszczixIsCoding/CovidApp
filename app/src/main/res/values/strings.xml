@@ -19,4 +19,8 @@
     <string name="recovered_chart">Liczba osób wyleczonych z koronawirusa od początku epidemii</string>
     <string name="stateDate">Stan na</string>
     <string name="ask_bot">Zadaj pytanie</string>
+    <string name="wojewodztwo">Województwo:</string>
+    <string name="liczba_zgonow">Liczba zgonów:</string>
+    <string name="dane_z_dnia">Dane z dnia</string>
+    <string name="liczba_przypadkow">Liczba przypadków:</string>
 </resources>
