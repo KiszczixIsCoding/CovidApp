@@ -30,7 +30,7 @@ public class PolandFragment extends Fragment implements AdapterView.OnItemSelect
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        root =  inflater.inflate(R.layout.fragment_poland, container, false);
+        root = inflater.inflate(R.layout.fragment_poland, container, false);
         //spinner initialization:
         regionsSpinner = root.findViewById(R.id.regionsSpinner);
         regionsSpinner.setOnItemSelectedListener(this);
@@ -86,11 +86,14 @@ public class PolandFragment extends Fragment implements AdapterView.OnItemSelect
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        if (position == 2) {
+        if (position != 0) {
             getParentFragmentManager().beginTransaction().replace(
-                    R.id.fragmentPolandContainer, new RegionsFragment()).commit();
-
+                    R.id.fragmentPolandContainer, new RegionsFragment(position)).commit();
+        } else {
+            getParentFragmentManager().beginTransaction().replace
+                    (R.id.fragmentPolandContainer, new PolandFragment()).commit();
         }
+
     }
 
     @Override
