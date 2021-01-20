@@ -22,7 +22,6 @@ public class InformationFragment extends Fragment {
 
     private EditText userInput;
     private ImageButton btn_send;
-    private String item;
     RecyclerView recyclerView;              // to create dynamic list with messengers (between user and bot)
     List<ResponseMessage> responseMessageList;
     MessageAdapter messageAdapter;
@@ -66,12 +65,74 @@ public class InformationFragment extends Fragment {
 
                     boolean pom = false;
 
-                    for (int i = 0; i < answersBase.questions.size(); i++) {
+                    // welcome
+                    for (int i = 0; i < 7; i++) {
                         if (msg.toUpperCase().contains(answersBase.questions.get(i))) {
-                            ResponseMessage responseMessage2 = new ResponseMessage(answersBase.answers.get(i), false);
+                            ResponseMessage responseMessage2 = new ResponseMessage(answersBase.answers.get(0), false);
                             responseMessageList.add(responseMessage2);
                             pom = true;
                         }
+                    }
+
+                    // symptoms
+                    if(msg.toUpperCase().contains(answersBase.questions.get(7)) ||
+                            ((msg.toUpperCase().contains(answersBase.questions.get(7)) &&
+                                    msg.toUpperCase().contains(answersBase.questions.get(8)))) ||
+                            (msg.toUpperCase().contains(answersBase.questions.get(7)) &&
+                                    msg.toUpperCase().contains(answersBase.questions.get(9)))) {
+
+                        ResponseMessage responseMessage3 = new ResponseMessage(answersBase.answers.get(1), false);
+                        responseMessageList.add(responseMessage3);
+                        pom = true;
+                    }
+
+                    // infection
+                   if(msg.toUpperCase().contains(answersBase.questions.get(10)) ||
+                            ((msg.toUpperCase().contains(answersBase.questions.get(10)) &&
+                                    msg.toUpperCase().contains(answersBase.questions.get(11)))) ||
+                            (msg.toUpperCase().contains(answersBase.questions.get(10)) &&
+                                    msg.toUpperCase().contains(answersBase.questions.get(12))) ||
+                            msg.toUpperCase().contains(answersBase.questions.get(13)) ||
+                            msg.toUpperCase().contains(answersBase.questions.get(14)) ||
+                            msg.toUpperCase().contains(answersBase.questions.get(15)) ||
+                           msg.toUpperCase().contains(answersBase.questions.get(16))) {
+
+                        ResponseMessage responseMessage4 = new ResponseMessage(answersBase.answers.get(2), false);
+                        responseMessageList.add(responseMessage4);
+                        pom = true;
+                    }
+
+                    // prevention
+                    if(((msg.toUpperCase().contains(answersBase.questions.get(17))) &&
+                                    msg.toUpperCase().contains(answersBase.questions.get(18))) ||
+                            ((msg.toUpperCase().contains(answersBase.questions.get(17))) &&
+                                    msg.toUpperCase().contains(answersBase.questions.get(19))) ||
+                            (msg.toUpperCase().contains(answersBase.questions.get(13)) &&
+                                    msg.toUpperCase().contains(answersBase.questions.get(20))) ||
+                            (msg.toUpperCase().contains(answersBase.questions.get(17)) &&
+                                    msg.toUpperCase().contains(answersBase.questions.get(21))) ||
+                            (msg.toUpperCase().contains(answersBase.questions.get(17)) &&
+                                    msg.toUpperCase().contains(answersBase.questions.get(22))) ||
+                            msg.toUpperCase().contains(answersBase.questions.get(23)) ||
+                            ((msg.toUpperCase().contains(answersBase.questions.get(8))) &&
+                                    msg.toUpperCase().contains(answersBase.questions.get(24))) ||
+                            ((msg.toUpperCase().contains(answersBase.questions.get(8))) &&
+                                    msg.toUpperCase().contains(answersBase.questions.get(25)))) {
+
+                        ResponseMessage responseMessage5 = new ResponseMessage(answersBase.answers.get(3), false);
+                        responseMessageList.add(responseMessage5);
+                        pom = true;
+                    }
+
+                    // positive test
+                    if(((msg.toUpperCase().contains(answersBase.questions.get(26)) &&
+                                    msg.toUpperCase().contains(answersBase.questions.get(27)))) ||
+                            (msg.toUpperCase().contains(answersBase.questions.get(27)) &&
+                                    msg.toUpperCase().contains(answersBase.questions.get(28)))) {
+
+                        ResponseMessage responseMessage6 = new ResponseMessage(answersBase.answers.get(4), false);
+                        responseMessageList.add(responseMessage6);
+                        pom = true;
                     }
 
                     if (!pom) {
