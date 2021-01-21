@@ -18,4 +18,7 @@
     <color name="colorBoard1">#80808080</color>
     <color name="colorBoard2">#FFFFFF</color>
     <color name="colorBoard3">#6200FF</color>
+    <color name="bgRegionsStart">#F18A83</color>
+    <color name="bgRegionsEnd">#EF5B50</color>
+    <color name="white">#ffff</color>
 </resources>
