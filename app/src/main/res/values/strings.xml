@@ -23,4 +23,6 @@
     <string name="liczba_zgonow">Liczba zgonów:</string>
     <string name="dane_z_dnia">Dane z dnia</string>
     <string name="liczba_przypadkow">Liczba przypadków:</string>
+    <string name="search">Wyszukaj..</string>
+    <string name="close">Zamknij</string>
 </resources>
