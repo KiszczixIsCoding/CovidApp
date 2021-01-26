@@ -21,4 +21,5 @@
     <color name="bgRegionsStart">#F18A83</color>
     <color name="bgRegionsEnd">#EF5B50</color>
     <color name="white">#ffff</color>
+    <color name="bg_map">#FEFAD6</color>
 </resources>

@@ -7,7 +7,7 @@
 
     <WebView
         android:id="@+id/activity_webview"
-        android:layout_width="match_parent"
+        android:layout_width="412dp"
         android:layout_height="681dp" />
 
 
