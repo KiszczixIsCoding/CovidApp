@@ -33,7 +33,9 @@ public class MapFragment extends Fragment {
         mWebView.getSettings().setJavaScriptEnabled(true);
         //mWebView.loadUrl("https://flo.uri.sh/visualisation/4141169/embed?auto=1");
         // na razie ładujemy cała strona, koncowo chce pobrac sama mape ze strony i zamiescic ale na razie nie wiem jeszce jak
-        mWebView.loadUrl("https://www.gov.pl/web/koronawirus/wykaz-zarazen-koronawirusem-sars-cov-2");
+        //mWebView.loadUrl("https://www.gov.pl/web/koronawirus/wykaz-zarazen-koronawirusem-sars-cov-2");
+        mWebView.loadUrl("file:///android_asset/map.html");
+
         return root;
 
     }

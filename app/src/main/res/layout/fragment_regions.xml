@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal"
-    tools:context=".poland.RegionsFragment" >
+    tools:context=".poland.RegionsFragment">
+<!--    android:background="@drawable/bg_regions">-->
 
     <RelativeLayout
         android:id="@+id/regionsHeader"
