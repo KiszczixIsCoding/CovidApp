@@ -1,23 +1,28 @@
 package pl.emb.covidsupport.global;
 
+import android.app.Dialog;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.Spinner;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModelProvider;
-
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.LineChart;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -26,18 +31,21 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-
 import pl.emb.covidsupport.R;
 import pl.emb.covidsupport.global.stats.HistoricalCovidStats;
 import pl.emb.covidsupport.global.stats.MainCovidStats;
 
-public class GlobalFragment extends Fragment implements AdapterView.OnItemSelectedListener {
+public class GlobalFragment extends Fragment implements AdapterView.OnItemClickListener {
     private final static int DEFAULT_SPINNER_POS = 135;
     private final static int DEFAULT_DAYS_RANGE = 14;
     private View root; // GlobalFragment view
     private TextView stateText, newCasesText, newDeathsText, totalCasesText, totalDeathsText;
     private VirusViewModel virusViewModel;
-    private ArrayList<CountryItem> countriesList; // list of countries
+    private Dialog spinnerDialog;
+    private ImageView currentImage;
+    private TextView currentCountry;
+    private CountriesAdapter countriesAdapter;
+    private EditText searchBox;
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
@@ -47,12 +55,14 @@ public class GlobalFragment extends Fragment implements AdapterView.OnItemSelect
         newDeathsText = root.findViewById(R.id.newDeathsText);
         totalCasesText = root.findViewById(R.id.totalCasesText);
         totalDeathsText = root.findViewById(R.id.totalDeathsText);
-        // country list expansion bar
-        Spinner countriesSpinner = root.findViewById(R.id.spinner);
+        currentImage = root.findViewById(R.id.currentFlag);
+        currentCountry = root.findViewById(R.id.currentCountry);
 
+        // country list expansion bar
         List<String> excludedCountries =
                 Arrays.asList(getResources().getStringArray(R.array.excludedIsoCodes));
-        countriesList = new ArrayList<>();
+
+        ArrayList<CountryItem> countriesList = new ArrayList<>();
 
         // loop to save countries to the list excluding countries without covid stats
         for (String iso : Locale.getISOCountries()) {
@@ -65,22 +75,71 @@ public class GlobalFragment extends Fragment implements AdapterView.OnItemSelect
         // sort countries by polish names
         Collections.sort(countriesList);
 
-
         virusViewModel = new ViewModelProvider(this).get(VirusViewModel.class);
-        CountriesAdapter countriesAdapter = new CountriesAdapter(root.getContext(),
+        countriesAdapter = new CountriesAdapter(root.getContext(),
                 countriesList);
 
-        countriesSpinner.setAdapter(countriesAdapter);
-        countriesSpinner.setSelection(DEFAULT_SPINNER_POS);  // Set default spinner country (Poland)
-        countriesSpinner.setOnItemSelectedListener(this);
+        // Prepare dialog with countries to choose
+        spinnerDialog = new Dialog(root.getContext());
+        spinnerDialog.setContentView(R.layout.searchable_dialog);
+        spinnerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        spinnerDialog.getWindow().setLayout(1300, 1800);
+
+        LinearLayout spinnerView = root.findViewById(R.id.linear);
+        spinnerView.setOnClickListener(view -> spinnerDialog.show());
+
+        ListView listView = spinnerDialog.findViewById(R.id.listView);
+        listView.setAdapter(countriesAdapter);
+
+        searchBox = spinnerDialog.findViewById(R.id.editText);
+        searchBox.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                countriesAdapter.getFilter().filter(charSequence);
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+
+        TextView closeText = spinnerDialog.findViewById(R.id.close);
+        closeText.setOnClickListener(view -> spinnerDialog.dismiss());
+
+        // Set listener on click on country
+        listView.setOnItemClickListener(this);
+
+        // Perform default choice (Poland)
+        listView.performItemClick(listView.getAdapter().getView(DEFAULT_SPINNER_POS,
+                null, null),
+                DEFAULT_SPINNER_POS, listView.getAdapter().getItemId(DEFAULT_SPINNER_POS));
+
+        listView.setSelection(DEFAULT_SPINNER_POS);
 
         return root;
     }
 
     @Override
-    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+        // Change current image and country name
+        currentImage.setImageResource(countriesAdapter.getItem(i).getCountryId());
+        currentCountry.setText(countriesAdapter.getItem(i).getPolishCountryName());
+        // Clear filter
+        countriesAdapter.getFilter().filter("");
+        // Clear searchable box
+        searchBox.setText("");
+        // Close countries' dialog
+        spinnerDialog.dismiss();
+
         LiveData<MainCovidStats> mainData =
-                virusViewModel.getNovelMainStats(countriesList.get(i).getIso2());
+                virusViewModel.getNovelMainStats(countriesAdapter.getItem(i).getIso2());
         mainData.observe(this, novelMainStatistics -> {
             newCasesText.setText(String.valueOf(novelMainStatistics.getTodayCases()));
             newDeathsText.setText(String.valueOf(novelMainStatistics.getTodayDeaths()));
@@ -89,11 +148,11 @@ public class GlobalFragment extends Fragment implements AdapterView.OnItemSelect
         });
 
         LiveData<HistoricalCovidStats> historicalData =
-                virusViewModel.getHistorical(countriesList.get(i).getIso2());
+                virusViewModel.getHistorical(countriesAdapter.getItem(i).getIso2());
         historicalData.observe(this, historicalStats ->  {
 
 //          Format and display the day of last update
-            String stateWithDate = stateText.getText() + " " + formatStateDate(
+            String stateWithDate = stateText.getText().subSequence(0,7) + " " + formatStateDate(
                     historicalStats.getDates().get(historicalStats.getDates().size() - 1));
             stateText.setText(stateWithDate);
 
@@ -126,11 +185,6 @@ public class GlobalFragment extends Fragment implements AdapterView.OnItemSelect
             LineChart recoveredChart = root.findViewById(R.id.recoveredChart);
             chartsManager.drawLineChart(dates, recovered, recoveredChart);
         });
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> adapterView) {
-        // TODO Auto-generated method stub
     }
 
     public String formatStateDate(String date) {
