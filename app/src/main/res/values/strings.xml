@@ -25,4 +25,5 @@
     <string name="liczba_przypadkow">Liczba przypadków:</string>
     <string name="search">Wyszukaj..</string>
     <string name="close">Zamknij</string>
+    <string name="wybierz_wojewodztwo">Aby zobaczyć liczbę zarażeń oraz przypadków śmiertelnych z dnia dzisiejszego wybierz województwo z listy:</string>
 </resources>
