@@ -25,6 +25,7 @@ public class PolandFragment extends Fragment implements AdapterView.OnItemSelect
     View root;
     private Spinner regionsSpinner;
     private List<String> regionsList;
+    int check = 0;
 
     @Nullable
     @Override
@@ -86,14 +87,10 @@ public class PolandFragment extends Fragment implements AdapterView.OnItemSelect
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        if (position != 0) {
+        if (++check > 1) { // We do not want to take action if it is initialization of fragment
             getParentFragmentManager().beginTransaction().replace(
                     R.id.fragmentPolandContainer, new RegionsFragment(position)).commit();
-        } else {
-            getParentFragmentManager().beginTransaction().replace
-                    (R.id.fragmentPolandContainer, new PolandFragment()).commit();
         }
-
     }
 
     @Override
