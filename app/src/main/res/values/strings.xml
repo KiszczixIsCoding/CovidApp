@@ -20,10 +20,12 @@
     <string name="stateDate">Stan na</string>
     <string name="ask_bot">Zadaj pytanie</string>
     <string name="wojewodztwo">Województwo:</string>
-    <string name="liczba_zgonow">Liczba zgonów:</string>
+    <string name="liczba_zgonow">Liczba przypadków śmiertelnych:</string>
     <string name="dane_z_dnia">Dane z dnia</string>
-    <string name="liczba_przypadkow">Liczba przypadków:</string>
+    <string name="liczba_przypadkow">Liczba zarażeń:</string>
     <string name="search">Wyszukaj..</string>
     <string name="close">Zamknij</string>
-    <string name="wybierz_wojewodztwo">Aby zobaczyć liczbę zarażeń oraz przypadków śmiertelnych z dnia dzisiejszego wybierz województwo z listy:</string>
+    <string name="wybierz_wojewodztwo">Aby zobaczyć liczbę zarażeń oraz przypadków śmiertelnych z dnia dzisiejszego z całego kraju, bądź konkretnego województwa wybierz interesującą cię opcję listy:</string>
+    <string name="powr_t_do_mapy_polski">Powrót do mapy Polski</string>
+    <string name="under_map_text">Liczba zarażeń oraz przypadków śmiertelnych liczona od początku pandemii, liczba aktywnych przypadków oznacza liczbę przypadków w tym momencie, zmiana aktywnych przypadków oznacza zmianę aktywnych przypadków w odniesieniu do dnia poprzeniego.</string>
 </resources>

@@ -30,6 +30,7 @@
                 android:text="@string/wybierz_wojewodztwo"
                 android:textSize="15sp"
                 android:gravity="center"
+                android:textStyle="bold"
                 android:fontFamily="@font/montserrat"/>
 
             <Spinner
