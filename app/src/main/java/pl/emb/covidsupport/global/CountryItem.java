@@ -48,6 +48,11 @@ public class CountryItem implements Comparable<CountryItem> {
     public int compareTo(CountryItem c2) {
         return getPolishCountryName().compareTo(c2.getPolishCountryName());
     }
+
+    @Override
+    public String toString() {
+        return getPolishCountryName();
+    }
 }
 
 
