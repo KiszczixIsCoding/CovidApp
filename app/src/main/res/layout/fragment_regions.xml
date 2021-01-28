@@ -4,8 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal"
-    tools:context=".poland.RegionsFragment" >
+    android:orientation="vertical"
+    tools:context=".poland.RegionsFragment"
+    android:background="@drawable/bg_regions">
 
     <RelativeLayout
         android:id="@+id/regionsHeader"
@@ -45,6 +46,7 @@
 
     <RelativeLayout
         android:layout_marginTop="30sp"
+        android:layout_marginStart="20dp"
         android:id="@+id/layout_cases"
         android:layout_below="@+id/layout_state"
         android:layout_width="match_parent"
@@ -69,6 +71,7 @@
 
     <RelativeLayout
         android:layout_marginTop="10sp"
+        android:layout_marginStart="20dp"
         android:id="@+id/layout_deaths"
         android:layout_below="@+id/layout_cases"
         android:layout_width="match_parent"
@@ -90,5 +93,15 @@
             android:text=""
             android:textSize="20sp"/>
     </RelativeLayout>
+
+    <Button
+        android:id="@+id/goBackButton"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="10dp"
+        android:text="@string/powr_t_do_mapy_polski"
+        android:background="@drawable/back_button"/>
 
 </RelativeLayout>

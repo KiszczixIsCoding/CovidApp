@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import java.text.ParseException;
@@ -25,6 +26,7 @@ public class RegionsFragment extends Fragment {
 
     View root;
     TextView numberCases, numberDeaths, wojewodztwoText, dateText;
+    Button goBackBtn;
 
     int regionNumber;
 
@@ -41,6 +43,7 @@ public class RegionsFragment extends Fragment {
         numberDeaths = root.findViewById(R.id.number_deaths);
         wojewodztwoText = root.findViewById(R.id.wojewodztwoTextView);
         dateText = root.findViewById(R.id.dateTextView);
+        goBackBtn = root.findViewById(R.id.goBackButton);
 
         Call<PolishCovidStats> polishStats = RetrofitClientBuilder.
                 getPolishCovidDataService().getAllStats();
@@ -49,9 +52,13 @@ public class RegionsFragment extends Fragment {
             public void onResponse(Call<PolishCovidStats> call, Response<PolishCovidStats> response) {
                 if (response.isSuccessful()) {
                     Log.e("success", response.body().toString());
-                    String wojewodztwoTextToDisplay = wojewodztwoText.getText() + " " + response.body().infectedByRegion.get(regionNumber).get("region");
-                    wojewodztwoText.setText(wojewodztwoTextToDisplay);
-                    numberCases.setText(response.body().getInfectedByRegion().get(regionNumber).get("infectedCount"));  //TODO: fix
+                    if (response.body().infectedByRegion.get(regionNumber).get("region").equals("Caly kraj")) {
+                        wojewodztwoText.setText(response.body().infectedByRegion.get(regionNumber).get("region"));
+                    } else {
+                        String wojewodztwoTextToDisplay = wojewodztwoText.getText() + " " + response.body().infectedByRegion.get(regionNumber).get("region");
+                        wojewodztwoText.setText(wojewodztwoTextToDisplay);
+                    }
+                    numberCases.setText(response.body().getInfectedByRegion().get(regionNumber).get("infectedCount"));
                     numberDeaths.setText(response.body().getInfectedByRegion().get(regionNumber).get("deceasedCount"));
                     String dateTextToDisplay = dateText.getText() + " " + formatStateDate(response.body().getLastUpdatedAtApify());
                     dateText.setText(dateTextToDisplay);
@@ -67,6 +74,16 @@ public class RegionsFragment extends Fragment {
             }
         });
 
+        // ustawiamy onClick na przycisk (nie mozemy zrobić jako osobna metodę z uwagi, że mamy do
+        // czynienia z fragmentem.
+        goBackBtn.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        getParentFragmentManager().beginTransaction().replace
+                                (R.id.fragmentPolandContainer, new PolandFragment()).commit();
+                    }
+                });
 
         return root;
     }
@@ -86,4 +103,5 @@ public class RegionsFragment extends Fragment {
         }
         return formattedDate;
     }
+
 }
