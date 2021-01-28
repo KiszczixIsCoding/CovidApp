@@ -38,7 +38,7 @@ public class LineMarkerView extends MarkerView {
         cases.setText(String.valueOf((int)highlight.getY()));
 
         TextView dateText = findViewById(R.id.dateText);
-        String highlightedDate = DateFormatter.formatStateDate(lastDate, 14 - (int)e.getX());
+        String highlightedDate = DateFormatter.formatStateDate(lastDate, daysLeft - (int)e.getX());
 
         dateText.setText(highlightedDate);
 
