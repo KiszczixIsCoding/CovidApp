@@ -23,5 +23,5 @@
     <color name="white">#ffff</color>
     <color name="bg_map">#FEFAD6</color>
     <color name="colorButton">#F8827A</color>
-
+    <color name="splash">#001343</color>
 </resources>

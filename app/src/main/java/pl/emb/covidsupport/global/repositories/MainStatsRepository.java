@@ -34,7 +34,7 @@ public class MainStatsRepository {
                 .addConverterFactory(GsonConverterFactory.create()).build();
 
         VirusApiHolder virusApiHolder = apiProvider.create(VirusApiHolder.class);
-        Call<MainCovidStats> call = virusApiHolder.getCountries(url + "?yesterday=true");
+        Call<MainCovidStats> call = virusApiHolder.getCountries(url + "?yesterday=false");
         call.enqueue(new Callback<MainCovidStats>() {
             @EverythingIsNonNull
             @Override

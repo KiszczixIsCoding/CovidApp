@@ -1,8 +1,6 @@
 package pl.emb.covidsupport.global;
 
 import android.content.Context;
-import android.graphics.Color;
-import android.service.media.MediaBrowserService;
 import android.util.Log;
 
 import com.github.mikephil.charting.charts.BarChart;
@@ -25,6 +23,8 @@ import java.util.List;
 import java.util.Locale;
 
 import pl.emb.covidsupport.R;
+import pl.emb.covidsupport.global.markers.ChartMarkerView;
+import pl.emb.covidsupport.global.markers.LineMarkerView;
 
 public class ChartsManager {
     private final SimpleDateFormat lineChartDateFormat
@@ -37,37 +37,36 @@ public class ChartsManager {
             "MM/dd/yy", new Locale("en"));
 
     private Context context;
+
     public ChartsManager(Context context) {
         this.context = context;
     }
 
-    public void drawLineChart(List<String> listX, List<Integer> listY1,
-                              List<Integer> listY2, LineChart lineChart) {
+    public void drawLineChart(List<String> listX, List<Integer> listY1, LineChart lineChart, int color) {
 
 //        Prepare axis data
-        ArrayList<Entry> casesList = new ArrayList<>();
-        ArrayList<Entry> deathsList = new ArrayList<>();
+        ArrayList<Entry> entriesList = new ArrayList<>();
 
         for (int i = 0; i < listX.size(); i++) {
-            casesList.add(new Entry(i, listY1.get(i)));
-            deathsList.add(new Entry(i, listY2.get(i)));
+            entriesList.add(new Entry(i, listY1.get(i)));
         }
 
 //        1st data set settings
-        LineDataSet set1 = new LineDataSet(casesList, "Data set 1");
+        LineDataSet set1;
+
+        if (color == R.color.colorCasesLine) {
+            set1 = new LineDataSet(entriesList, "Liczba zachorowań");
+        } else {
+            set1 = new LineDataSet(entriesList, "Liczba zgonów");
+        }
+
         set1.setDrawCircles(false);
         set1.setColor(context.getColor(R.color.colorCasesLine));
         set1.setLineWidth(6);
 
-//        2nd data set settings
-        LineDataSet set2 = new LineDataSet(deathsList, "Data set 2");
-        set2.setDrawCircles(false);
-        set2.setColor(context.getColor(R.color.colorDeathsLine));
-        set2.setLineWidth(6);
 
         ArrayList<ILineDataSet> dataSets = new ArrayList<>();
         dataSets.add(set1);
-        dataSets.add(set2);
         LineData data = new LineData(dataSets);
 
 //        LineChart settings
@@ -79,7 +78,15 @@ public class ChartsManager {
         lineChart.getDescription().setEnabled(false);
         lineChart.getAxisRight().setEnabled(false);
         lineChart.getLineData().setDrawValues(false);
-//        lineChart.getLegend().setEnabled(false);
+
+        LineMarkerView marker = new LineMarkerView(context, R.layout.marker_layout,
+                "Liczba ozdrowieńców:", listX.get(listX.size() - 1), listX.size());
+        if (color == R.color.colorCasesLine) {
+            marker.setSection("Liczba zachorowań:");
+        } else {
+            marker.setSection("Liczba zgonów:");
+        }
+        lineChart.setMarker(marker);
         lineChart.invalidate();  // Draw LineChart
     }
 
@@ -92,7 +99,7 @@ public class ChartsManager {
         }
 
 //        1st data set settings
-        LineDataSet set1 = new LineDataSet(recoveredList, "Data set 1");
+        LineDataSet set1 = new LineDataSet(recoveredList, "Liczba ozdrowieńców");
         set1.setDrawCircles(false);
         set1.setColor(context.getColor(R.color.colorLine));
         set1.setDrawFilled(true);
@@ -113,7 +120,10 @@ public class ChartsManager {
         lineChart.getDescription().setEnabled(false);
         lineChart.getAxisRight().setEnabled(false);
         lineChart.getLineData().setDrawValues(false);
-//        lineChart.getLegend().setEnabled(false);
+
+        LineMarkerView marker = new LineMarkerView(context, R.layout.marker_layout,
+                "Liczba ozdrowieńców:", listX.get(listX.size() - 1), listX.size());
+        lineChart.setMarker(marker);
         lineChart.invalidate();  // Draw LineChart
     }
 
@@ -126,8 +136,13 @@ public class ChartsManager {
         }
 
 //        Data set settings
-        BarDataSet barDataSet = new BarDataSet(lastData, null);
-        barDataSet.setColor(color);
+        BarDataSet barDataSet;
+        if (color == context.getColor(R.color.colorCasesChart)) {
+            barDataSet = new BarDataSet(lastData, "Liczba zachorowań");
+        } else {
+            barDataSet = new BarDataSet(lastData, "Liczba zgonów");
+        }
+        barDataSet.setColor(context.getColor(color));
         BarData data = new BarData(barDataSet);
 
 //        BarChart settings
@@ -139,7 +154,18 @@ public class ChartsManager {
         barChart.getDescription().setEnabled(false);
         barChart.getAxisRight().setEnabled(false);
         barChart.getBarData().setDrawValues(false);
-//        barChart.getLegend().setEnabled(false);
+
+
+        ChartMarkerView marker;
+        Log.e(String.valueOf(color), String.valueOf(R.color.colorCasesChart));
+        if (color == context.getColor(R.color.colorCasesChart)) {
+             marker = new ChartMarkerView(context, R.layout.marker_layout,
+                    "Liczba zachorowań:", dates.get(dates.size() - 1), 14);
+        } else {
+             marker = new ChartMarkerView(context, R.layout.marker_layout,
+                    "Liczba zgonów:", dates.get(dates.size() - 1), 14);
+        }
+        barChart.setMarker(marker);
         barChart.invalidate(); //Draw BarChart
     }
 

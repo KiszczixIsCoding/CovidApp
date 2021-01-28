@@ -25,7 +25,11 @@
     <string name="liczba_przypadkow">Liczba zarażeń:</string>
     <string name="search">Wyszukaj..</string>
     <string name="close">Zamknij</string>
-    <string name="wybierz_wojewodztwo">Aby zobaczyć liczbę zarażeń oraz przypadków śmiertelnych z dnia dzisiejszego z całego kraju, bądź konkretnego województwa wybierz interesującą cię opcję listy:</string>
     <string name="powr_t_do_mapy_polski">Powrót do mapy Polski</string>
     <string name="under_map_text">Liczba zarażeń oraz przypadków śmiertelnych liczona od początku pandemii, liczba aktywnych przypadków oznacza liczbę przypadków w tym momencie, zmiana aktywnych przypadków oznacza zmianę aktywnych przypadków w odniesieniu do dnia poprzeniego.</string>
+    <string name="wybierz_wojewodztwo">Aby zobaczyć liczbę zarażeń oraz przypadków śmiertelnych z dnia dzisiejszego wybierz województwo z listy:</string>
+    <string name="covidinfo">CovidINFO</string>
+    <string name="dateLabel">Data</string>
+    <string name="cases_chart">Liczba zachorowań od początku epidemii</string>
+    <string name="deaths_chart">Liczba zgonów od początku epidemii</string>
 </resources>

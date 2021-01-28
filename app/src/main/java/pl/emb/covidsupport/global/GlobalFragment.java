@@ -23,6 +23,11 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModelProvider;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.LineChart;
+
+import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -152,8 +157,9 @@ public class GlobalFragment extends Fragment implements AdapterView.OnItemClickL
         historicalData.observe(this, historicalStats ->  {
 
 //          Format and display the day of last update
-            String stateWithDate = stateText.getText().subSequence(0,7) + " " + formatStateDate(
-                    historicalStats.getDates().get(historicalStats.getDates().size() - 1));
+            String lastDate = historicalStats.getDates().get(historicalStats.getDates().size() - 1);
+            String stateWithDate = stateText.getText().subSequence(0,7) + " " +
+                                    DateFormatter.formatStateDate(lastDate);
             stateText.setText(stateWithDate);
 
             List<String> dates = historicalStats.getDates();
@@ -167,39 +173,27 @@ public class GlobalFragment extends Fragment implements AdapterView.OnItemClickL
 
             ChartsManager chartsManager = new ChartsManager(getContext());
 
-            // Prepare and draw 1st chart (line chart of all cases & deaths)
+            // Prepare and draw 1st chart (line chart of all cases)
             LineChart casesChart = root.findViewById(R.id.casesChart);
-            chartsManager.drawLineChart(dates, cases, deaths, casesChart);
+            chartsManager.drawLineChart(dates, cases, casesChart, R.color.colorCasesLine);
 
-            // Prepare and draw 2nd chart (bar chart of cases during last days)
+            // Prepare and draw 2nd chart (line chart of all deaths)
+            LineChart deathsChart = root.findViewById(R.id.deathsChart);
+            chartsManager.drawLineChart(dates, deaths, deathsChart, R.color.colorDeathsLine);
+
+            // Prepare and draw 3rd chart (bar chart of cases during last days)
             BarChart barChart = root.findViewById(R.id.newCasesChart);
             chartsManager.drawBarChart(subDates, subCases,
-                    barChart, getContext().getColor(R.color.colorCasesChart));
+                    barChart, R.color.colorCasesChart);
 
-            // Prepare and draw 3rd chart (bar chart of deaths during last days)
+            // Prepare and draw 4th chart (bar chart of deaths during last days)
             BarChart barChart1 = root.findViewById((R.id.newDeathsChart));
             chartsManager.drawBarChart(subDates, subDeaths,
-                    barChart1, getContext().getColor(R.color.colorDeathsChart));
+                    barChart1, R.color.colorDeathsChart);
 
-            // Prepare and draw 4th chart (line chart of all recovered)
+            // Prepare and draw 5th chart (line chart of all recovered)
             LineChart recoveredChart = root.findViewById(R.id.recoveredChart);
             chartsManager.drawLineChart(dates, recovered, recoveredChart);
         });
-    }
-
-    public String formatStateDate(String date) {
-
-        SimpleDateFormat plFormat = new SimpleDateFormat(
-                "dd.MM.20yy", new Locale("pl"));
-        SimpleDateFormat engFormat = new SimpleDateFormat(
-                "MM/dd/yy", new Locale("eng"));
-        String formattedDate = "";
-        try {
-            Date lastDate = engFormat.parse(date);
-            formattedDate = plFormat.format(lastDate);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        return formattedDate;
     }
 }
