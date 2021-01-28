@@ -32,4 +32,8 @@
     <string name="dateLabel">Data</string>
     <string name="cases_chart">Liczba zachorowań od początku epidemii</string>
     <string name="deaths_chart">Liczba zgonów od początku epidemii</string>
+    <string name="recovered">Liczba ozdrowieńców</string>
+    <string name="active">"Liczba aktywnych przypadków"</string>
+    <string name="tests">Ogólnie testów</string>
+    <string name="critical">W stanie krytycznym</string>
 </resources>

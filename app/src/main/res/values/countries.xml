@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="countriesNames">
-        <item>FK:Macedonia Północna</item>
+        <item>MK:Macedonia Północna</item>
         <item>CD:DR Konga</item>
         <item>CV:Rep. Zielonego Przylądka</item>
         <item>ZA:Rep. Południowej Afryki</item>

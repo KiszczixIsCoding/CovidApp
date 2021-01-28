@@ -1,17 +1,21 @@
 package pl.emb.covidsupport.global;
 
 import android.app.Dialog;
+import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.EditText;
+import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -23,6 +27,8 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModelProvider;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.LineChart;
+import com.synnapps.carouselview.CarouselView;
+import com.synnapps.carouselview.ViewListener;
 
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
@@ -44,22 +50,21 @@ public class GlobalFragment extends Fragment implements AdapterView.OnItemClickL
     private final static int DEFAULT_SPINNER_POS = 135;
     private final static int DEFAULT_DAYS_RANGE = 14;
     private View root; // GlobalFragment view
-    private TextView stateText, newCasesText, newDeathsText, totalCasesText, totalDeathsText;
+    private TextView stateText, populationText, newCasesText, newDeathsText, totalCasesText, totalDeathsText;
+    private TextView recoveredText, activeText, testsText, criticalText;
     private VirusViewModel virusViewModel;
     private Dialog spinnerDialog;
     private ImageView currentImage;
     private TextView currentCountry;
     private CountriesAdapter countriesAdapter;
     private EditText searchBox;
+    private CarouselView carouselView;
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         root = inflater.inflate(R.layout.fragment_global, container, false);
         stateText = root.findViewById(R.id.stateLabel);
-        newCasesText = root.findViewById(R.id.newCasesText);
-        newDeathsText = root.findViewById(R.id.newDeathsText);
-        totalCasesText = root.findViewById(R.id.totalCasesText);
-        totalDeathsText = root.findViewById(R.id.totalDeathsText);
+        populationText = root.findViewById(R.id.population);
         currentImage = root.findViewById(R.id.currentFlag);
         currentCountry = root.findViewById(R.id.currentCountry);
 
@@ -88,7 +93,11 @@ public class GlobalFragment extends Fragment implements AdapterView.OnItemClickL
         spinnerDialog = new Dialog(root.getContext());
         spinnerDialog.setContentView(R.layout.searchable_dialog);
         spinnerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        spinnerDialog.getWindow().setLayout(1300, 1800);
+        DisplayMetrics dm = new DisplayMetrics();
+        int width = Resources.getSystem().getDisplayMetrics().widthPixels;
+        int height = Resources.getSystem().getDisplayMetrics().heightPixels;
+
+        spinnerDialog.getWindow().setLayout((int)(0.85 * width), (int)(0.70 * height));
 
         LinearLayout spinnerView = root.findViewById(R.id.linear);
         spinnerView.setOnClickListener(view -> spinnerDialog.show());
@@ -116,6 +125,32 @@ public class GlobalFragment extends Fragment implements AdapterView.OnItemClickL
 
         TextView closeText = spinnerDialog.findViewById(R.id.close);
         closeText.setOnClickListener(view -> spinnerDialog.dismiss());
+
+        carouselView = root.findViewById(R.id.carouselView);
+        carouselView.setPageCount(2);
+        carouselView.setSlideInterval(10000);
+
+        View view1 = getLayoutInflater().inflate(R.layout.first_cards, null);
+        newCasesText = view1.findViewById(R.id.newCasesText);
+        newDeathsText = view1.findViewById(R.id.newDeathsText);
+        totalCasesText = view1.findViewById(R.id.totalCasesText);
+        totalDeathsText = view1.findViewById(R.id.totalDeathsText);
+
+        View view2 = getLayoutInflater().inflate(R.layout.second_cards, null);
+        recoveredText = view2.findViewById(R.id.recoveredText);
+        activeText = view2.findViewById(R.id.activeText);
+        criticalText = view2.findViewById(R.id.criticalText);
+        testsText = view2.findViewById(R.id.testsText);
+
+        carouselView.setViewListener(new ViewListener() {
+            @Override
+            public View setViewForPosition(int position) {
+                if (position == 0)
+                {
+                    return view1;
+                } else return view2;
+            }
+        });
 
         // Set listener on click on country
         listView.setOnItemClickListener(this);
@@ -146,10 +181,16 @@ public class GlobalFragment extends Fragment implements AdapterView.OnItemClickL
         LiveData<MainCovidStats> mainData =
                 virusViewModel.getNovelMainStats(countriesAdapter.getItem(i).getIso2());
         mainData.observe(this, novelMainStatistics -> {
+            populationText.setText(String.valueOf(novelMainStatistics.getPopulation()));
             newCasesText.setText(String.valueOf(novelMainStatistics.getTodayCases()));
             newDeathsText.setText(String.valueOf(novelMainStatistics.getTodayDeaths()));
             totalCasesText.setText(String.valueOf(novelMainStatistics.getCases()));
             totalDeathsText.setText(String.valueOf(novelMainStatistics.getDeaths()));
+
+            recoveredText.setText(String.valueOf(novelMainStatistics.getRecovered()));
+            activeText.setText(String.valueOf(novelMainStatistics.getActive()));
+            criticalText.setText(String.valueOf(novelMainStatistics.getCritical()));
+            testsText.setText(String.valueOf(novelMainStatistics.getTests()));
         });
 
         LiveData<HistoricalCovidStats> historicalData =

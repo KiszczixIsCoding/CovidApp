@@ -13,6 +13,7 @@ public class MainCovidStats {
     private String recovered;
     private String active;
     private String critical;
+    private String tests;
     private String population;
     private String continent;
     private String oneCasePerPeople;
@@ -56,6 +57,10 @@ public class MainCovidStats {
 
     public String getCritical() {
         return critical;
+    }
+
+    public String getTests() {
+        return tests;
     }
 
     public String getPopulation() {

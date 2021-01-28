@@ -61,7 +61,7 @@ public class ChartsManager {
         }
 
         set1.setDrawCircles(false);
-        set1.setColor(context.getColor(R.color.colorCasesLine));
+        set1.setColor(context.getColor(color));
         set1.setLineWidth(6);
 
 
@@ -157,7 +157,7 @@ public class ChartsManager {
 
 
         ChartMarkerView marker;
-        Log.e(String.valueOf(color), String.valueOf(R.color.colorCasesChart));
+
         if (color == context.getColor(R.color.colorCasesChart)) {
              marker = new ChartMarkerView(context, R.layout.marker_layout,
                     "Liczba zachorowań:", dates.get(dates.size() - 1), 14);

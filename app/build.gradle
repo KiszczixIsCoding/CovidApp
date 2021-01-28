@@ -49,4 +49,5 @@ dependencies {
     implementation 'com.squareup.okhttp3:logging-interceptor:4.9.0'
     implementation 'net.danlew:android.joda:2.10.9.1'
     implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.19'
+    implementation 'com.synnapps:carouselview:0.1.5'
 }
