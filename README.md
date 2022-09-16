@@ -4,7 +4,7 @@ The application CovidApp was created because of Covid-19 global pandemic respond
 * detailed information from every polish voivodeship 
 * online consultation with Chatbot
 
-#Technologies
+# Technologies
 Project is created with:
 * Android SDK 30.0.2
 * Java - programming language
